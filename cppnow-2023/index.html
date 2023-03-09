@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+
+    <title>Reflect `*this`!</title>
+
+    <link rel="stylesheet" href="reveal.js/dist/reset.css" />
+    <link rel="stylesheet" href="reveal.js/dist/reveal.css" />
+    <link rel="stylesheet" href="reveal.js/dist/theme/sky.css" id="theme" />
+    <link rel="stylesheet" href="highlight.js/styles/base16/summerfruit-light.css"/>
+
+    <style>
+        .highlight-text-white { color: #fff; }
+        .highlight-text-red { color: #f00; }
+        .reveal.fade .slides > section, .reveal.fade .slides > section > section,
+        .reveal.none .slides > section, .reveal.none .slides > section > section {
+          min-height: 100% !important;
+          min-width: 100% !important;
+          display: flex !important;
+          flex-direction: column !important;
+          justify-content: center !important;
+          position: absolute !important;
+          top: 0 !important;
+          align-items: center !important;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section data-markdown="intro.md" data-separator="@@@@@" data-separator-vertical="@@@" data-separator-notes="^NOTES:"></section>
+        <section data-markdown="mixin.md" data-separator="@@@@@" data-separator-vertical="@@@" data-separator-notes="^NOTES:"></section>
+        <section data-markdown="design-goals.md" data-separator="@@@@@" data-separator-vertical="@@@" data-separator-notes="^NOTES:"></section>
+        <section data-markdown="existing.md" data-separator="@@@@@" data-separator-vertical="@@@" data-separator-notes="^NOTES:"></section>
+        <section data-markdown="extend.md" data-separator="@@@@@" data-separator-vertical="@@@" data-separator-notes="^NOTES:"></section>
+        <section data-markdown="easy-to-use.md" data-separator="@@@@@" data-separator-vertical="@@@" data-separator-notes="^NOTES:"></section>
+
+      </div>
+    </div>
+    <script src="./reveal.js/dist/reveal.js"></script>
+    <script src="./reveal.js/plugin/notes/notes.js"></script>
+    <script src="./reveal.js/plugin/markdown/markdown.js"></script>
+    <script src="./reveal.js/plugin/highlight/highlight.js"></script>
+    <script src="./reveal.js/plugin/zoom/zoom.js"></script>
+    <script type='module'>
+      // More info about initialization & config:
+      // - https://revealjs.com/initialization/
+      // - https://revealjs.com/config/
+      Reveal.initialize({
+        hash: true,
+        slideNumber: true,
+        transition: 'none',
+        backgroundTransition: 'none',
+        navigationMode: 'linear',
+        dependencies: [
+          { src: '//cdn.jsdelivr.net/npm/reveal-plantuml' },
+        ],
+
+        // Learn about plugins: https://revealjs.com/plugins/
+        plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom],
+      });
+    </script>
+  </body>
+</html>
