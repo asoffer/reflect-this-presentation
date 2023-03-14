@@ -12,8 +12,8 @@ This is the wrong question to ask first.
 * Code that is easy to read, understand, and write
 * Practical safety and testing mechanisms
 * Fast and scalable development
-* ~Modern OS platforms, hardware architectures, and environments~
-* ~Interoperability with and migration from existing C++ code~
+* Modern OS platforms, hardware architectures, and environments
+* Interoperability with and migration from existing C++ code
 
 NOTES:
 
@@ -21,6 +21,10 @@ I don't claim that these should be everyone's priorities.
 
 @@@
 
+## Software and language evolution
+
+* For the library author.
+* For the library user.
 
 ## Fast and scalable development
 

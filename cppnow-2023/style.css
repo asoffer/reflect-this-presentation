@@ -1,0 +1,34 @@
+.reveal .footer {
+  position: absolute;
+  bottom: 0;
+  padding: 1em;
+  font-size: 18pt;
+  width: 100%;
+  background-color: #dad0ff;
+  z-index: 999;
+}
+
+h1 {
+  position: absolute;
+  top: 0;
+}
+
+h2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-family: serif !important;
+}
+
+.present {
+  left: 0;
+  top: 0;
+}
+
+.strikethrough {
+  color: #a00000;
+  text-decoration:line-through;
+}
+.strikethrough > span {
+  color: #000;
+}

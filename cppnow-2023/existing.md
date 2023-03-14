@@ -1,17 +1,24 @@
 ## Boost.pfr
 
-```
+<div style="column-count: 2">
+<br/>
+
+```cc[]
 struct UserInfo {
     int64_t id;
-    std::string name, email, login;
+    std::string name;
+    std::string email;
+    std::string login;
 };
 ```
+<br/>
 
 | Goal              | Rating |
 | ----------------- | ------ |
 | Evolution         |     D- |
 | Understandability |     A  |
 | Development Speed |     A+ |
+</div>
 
 NOTES:
 
@@ -25,9 +32,14 @@ dev speed.
 @@@
 
 ## TUPLE_DEFINE_STRUCT
-```
+
+<div style="column-count: 2">
+
+```cc[]
 struct UserInfo {
-    TUPLE_DEFINE_STRUCT(UserInfo, (eq, ne, stream),
+    TUPLE_DEFINE_STRUCT(
+        UserInfo,
+        (eq, ne, stream),
     (int64_t, id),
     (std::string, name),
     (std::string, email),
@@ -39,15 +51,21 @@ struct UserInfo {
 | ----------------- | ------ |
 | Evolution         |     B+ |
 | Understandability |     C- |
-| Development Speed |     B+ |
+| Development Speed |     B  |
 
+</div>
 
 @@@
 
 ## Extend
-```
-struct UserInfo : Extend<UserInfo>::With<EqualityExtension
-                                         DebugPrintingExtension> {
+
+<div style="column-count: 2">
+
+```cc[]
+struct UserInfo
+  : Extend<UserInfo>::With<
+      DebugPrintingExtension,
+      EqualityExtension> {
     int64_t id;
     std::string name;
     std::string email;
@@ -60,6 +78,8 @@ struct UserInfo : Extend<UserInfo>::With<EqualityExtension
 | Evolution         |     A  |
 | Understandability |     A- |
 | Development Speed |     B+ |
+
+</div>
 
 @@@
 

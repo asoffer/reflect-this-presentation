@@ -6,11 +6,15 @@
 
 @@@
 
+## What could go wrong?
+
+@@@
+
 ```cc[]
 class SafeString : public Extend<SafeString, 2>::With<EqualityExtesnion> {
    explicit SafeString(std::string s) : s_(std::move(S)) {}
 
-   std::string copy() cons;
+   std::string copy() const;
 
   private:
    friend EnableExtensions;
