@@ -30,4 +30,6 @@ them.
 But this is also a talk about API design. I'm going to use mixins as a case
 study in design.
 
-
+If I convince you of one thing, it's that the there is a ton of fertile ground
+in the design space here. In the library space, as well as at the
+language-level.

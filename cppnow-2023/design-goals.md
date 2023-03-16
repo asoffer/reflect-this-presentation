@@ -1,11 +1,12 @@
-## How should we design a mixin library?
+## <span style="font-size:42pt;">How should we design a mixin library?</span>
 
 NOTES:
 This is the wrong question to ask first.
 
 @@@
 
-## What are our design priorities?
+## <span style="font-size:42pt;"><span style="color:#a00000;text-decoration:line-through"><span style="color:black">How should we design a mixin library?</span></span></span>
+### <span style="color:#a00000;font-family:serif;position:absolute;top:0.8em;left:1em;">What are our design priorities?</span>
 
 * Performance-critical software
 * Software and language evolution
@@ -19,18 +20,10 @@ NOTES:
 
 I don't claim that these should be everyone's priorities.
 
-@@@
+Evolution:
+* For the library author
+* For the library user
 
-## Software and language evolution
-
-* For the library author.
-* For the library user.
-
-## Fast and scalable development
-
-* The API should feel familiar to a user with only a basic knowledge of C++.
-* The API should be copy-pastable.
-
-NOTES:
-
-I want to dig into this one.
+Fast scalable development:
+* Familiar if you only have a basic knowledge of C++
+* Copy-pastable
