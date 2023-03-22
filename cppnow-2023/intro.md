@@ -11,14 +11,20 @@
 
 ## What is this talk?
 
-1. Mixins
-    * What problems do they address?
-    * Explore the design space
-1. Library Design
-    * One specific set of priorities
-    * Explore existing solutions.
-1. Deep dive into the implementation.
-1. The future
+<img src="img/ice-cream.png" />
+
+@@@
+
+## What is this talk?
+
+<img src="img/ice-cream-mixin.png" style="width:250px; margin-top:72px;" />
+
+@@@
+
+## What is this talk?
+
+<img src="img/ice-cream-mixin-cool.png" style="width:280px; margin-left:3px;" />
+
 
 NOTES:
 

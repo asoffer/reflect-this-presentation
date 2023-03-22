@@ -2,18 +2,23 @@
 
 NOTES:
 
-Actually, no. That's not the right question.
+Actually, we can't start here. You may already know what a mixin is, but I want
+to spend some time motivating why mixins are valuable, by first talking about...
+
 
 @@@
 
 ## What <span style="color:#a00000;text-decoration:line-through"><span style="color:black">is a Mixin</span></span>?
 ### <span style="color:#a00000;font-family:serif;position:absolute;top:0.7em;left:2em;">problem are we solving</span>
 
-@@@
+<style>
+.highlight-line {
+    background-color: #ff9;
+}
+</style>
 
-## A simple Person struct.
-
-<pre style="font-size:6pt"><code data-line-numbers class="cc hljs cpp">struct Person {
+```cc[|1-3,7|5-6,9-40]
+struct Person {
   std::string name;
   std::string email;
 
@@ -21,39 +26,44 @@ Actually, no. That's not the right question.
   friend bool operator!=(const Person&, const Person&) = default;
 };
 
-template &lt;&gt;
-struct std::hash&lt;Person&gt; {
+template <>
+struct std::hash<Person> {
   size_t operator()(const Person& p) const {
-    return hash_combine(std::hash&lt;std::string&gt;{}(p.name),
-                        std::hash&lt;std::string&gt;{}(p.email));
+    return hash_combine(std::hash<std::string>{}(p.name),
+                        std::hash<std::string>{}(p.email));
   }
 };
 
-template &lt;typename H&gt;
+template <typename H>
 H AbslHashValue(H h, const Person& p) {
   return H::combine(std::move(h), p.name, p.email);
 }
 
-template &lt;&gt;
-struct std::less&lt;Person&gt; {
+template <>
+struct std::less<Person> {
   size_t operator()(const Person& lhs, const Person& rhs) const {
-    if (lhs.name &lt; rhs.name) return true;
-    if (rhs.name &lt; lhs.name) return false;
-    return lhs.email &lt; rhs.email;
+    if (lhs.name < rhs.name) return true;
+    if (rhs.name < lhs.name) return false;
+    return lhs.email < rhs.email;
   }
 };
 
-std::ostream& operator&lt;&lt;(std::ostream& os, const Person& p) {
-  return os &lt;&lt; "Person"
-            &lt;&lt; "[ name: " &lt;&lt; std::quoted(p.name)
-            &lt;&lt; ", email: " &lt;&lt; std::quoted(p.email) &lt;&lt; " ]";
+std::ostream& operator<<(std::ostream& os, const Person& p) {
+  return os << "Person"
+            << "[ name: " << std::quoted(p.name)
+            << ", email: " << std::quoted(p.email) << " ]";
 }
 
 std::string ToJson(const Person& p) {
   return absl::StrFormat("{ name: %v, email: %v }",
                          std::quoted(p.name), std::quoted(p.email));
 }
-</code></pre>
+```
+<!-- .element style="font-size:6pt; width:45%;" class="fragment" data-fragment-index="1" -->
+
+NOTES:
+
+...the problem we're trying to solve.
 
 @@@
 
