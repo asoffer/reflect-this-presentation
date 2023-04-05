@@ -3,27 +3,45 @@
 NOTES:
 This is the wrong question to ask first.
 
+We know what the problem is and the tool we're going to use to address it, but no solution is perfect. We want to have an understanding ahead of time of what is critical and where we can compromise.
+
 @@@
 
 ## <span style="font-size:42pt;"><span style="color:#a00000;text-decoration:line-through"><span style="color:black">How should we design a mixin library?</span></span></span>
-### <span style="color:#a00000;font-family:serif;position:absolute;top:0.8em;left:1em;">What are our design priorities?</span>
+### <span class="edited_title">What are our design priorities?</span>
 
-* Performance-critical software
-* Software and language evolution
-* Code that is easy to read, understand, and write
-* Practical safety and testing mechanisms
-* Fast and scalable development
-* Modern OS platforms, hardware architectures, and environments
-* Interoperability with and migration from existing C++ code
+<img class="fragment bordered" width="80%" src="img/chandler-priorities.png" />
 
 NOTES:
 
-I don't claim that these should be everyone's priorities.
+There's a lot in here that generally matches my own design sensibilities, but not everything applies. I want to highlight 3 of these in particular.
+
+@@@
+
+## <span style="font-size:42pt;"><span style="color:#a00000;text-decoration:line-through"><span style="color:black">How should we design a mixin library?</span></span></span>
+### <span class="edited_title">What are our design priorities?</span>
+
+* Evolution
+* Understandability
+* Safety & Testing
+* Development Speed
+
+NOTES:
 
 Evolution:
 * For the library author
 * For the library user
 
-Fast scalable development:
+Understandability
 * Familiar if you only have a basic knowledge of C++
-* Copy-pastable
+* Copy-paste-able
+
+Safety & Testing
+* Pit of success
+
+Development speed
+* ???
+
+I don't claim that these should be everyone's priorities.
+It's worth highlighting that I took performance off the list. It's not that I don't care about performance. I do. It's that runtime performance did not play into any of our design decisions.
+Compile-time performance was a concern, but ultimately was not bad enough to be problematic.

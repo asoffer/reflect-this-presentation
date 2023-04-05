@@ -1,92 +1,83 @@
 ## Safety and Testing
 
-* Observability
+```cc[|11]
+class SafeString : public Extend<SafeString, 2>::With<EqualityExtesnion> {
+   explicit SafeString(std::string s) : s_(std::move(S)) {}
+
+   std::string copy() const;
+
+   void update(std::invocable<std::string&> auto&& f) { ... }
+
+  private:
+   friend EnableExtensions;
+
+   std::mutex m_;
+   std::string s_;
+};
+```
+<!-- .element style="font-size:12pt;" -->
+
+NOTES:
+
+With a naive implementation, this will compile-just fine up until someone
+actually goes to use equality. We added hooks so users could instantiate
+dependent expressions in the types constructor. Not perfect, but will be
+surfaced earlier (when the type is constructed, even if the extension isn't
+used.
 
 @@@
+
+## Safety and Testing
 
 ```cc[]
 template <typename T>
-struct DebugPrintingExtension {
-  friend std::ostream& operator<<(std::ostream& os, const T& value) {
-    std::string_view separator = "{ ";
-    std::apply([&](auto&... fields) {
-      os << std::exchange(separator, ", ") << fields;
-    }, DebugPrintingExtension::Unpack(value));
-    return os << " }";
+struct EqualityExtension : Extension {
+  friend bool operator==(const T& lhs, const T& rhs) { ... }
+  friend bool operator!=(const T& lhs, const T& rhs) { ... }
+
+
+
+
+
+};
+```
+<!-- .element style="font-size:12pt;" -->
+
+@@@
+
+## Safety and Testing
+
+```cc[]
+template <typename T>
+struct EqualityExtension : Extension {
+  friend bool operator==(const T& lhs, const T& rhs) { ... }
+  friend bool operator!=(const T& lhs, const T& rhs) { ... }
+
+  constexpr void ForceInstantiateDependentExpressions() const {
+    (void)(static_cast<const T&>(*this) == static_cast<const T&>(*this));
+    (void)(static_cast<const T&>(*this) != static_cast<const T&>(*this));
   }
 };
 ```
-
-NOTES:
-
-Our original implementation looked like this, but it was definitely lacking.
-With TUPLE_DEFINE_STRUCT, people had access to the field names.
+<!-- .element style="font-size:12pt;" -->
 
 @@@
 
-## A wild zygoloid appeared!
-
-<img style="margin:0.2em; border:1px solid #000; border-radius:0.2em;" src="img/builtin_dump_struct_1.png" />
-<img style="margin:0.2em; border:1px solid #000; border-radius:0.2em;" src="img/builtin_dump_struct_2.png" />
-
-<a href="https://www.reddit.com/r/cpp/comments/100x37a/clang15_builtin_dump_struct_got_a_much_needed/">Reddit</a>
-
-NOTES:
-
-TODO: Show the first bit, then the top comment then the response.
-
-@@@
+## Safety and Testing
 
 ```cc[]
-int PrintfHijack(ParsingState& state, std::span<std::string_view> fields,
-                 const char *format, ...) {
-  std::va_list va;
-  va_start(va, format);
-  ...
-  fields[state.index++] = va_arg(va, const char*);
-  ...
-}
-```
-
-@@@
-
-```cc[]
-template <size_t FieldCount>
-struct FieldNameInfo {
-  std::array<std::string_view, FieldCount> field_names;
-  bool jitter;
-  bool success;
+template <typename... Extensions>
+struct ExtensionSet {
+  constexpr ExtensionSet() : Extensions()... {
+    if (false) {
+      (ForceInstantiateDependentExpressions(static_cast<Extensions&>(*this)),
+       ...);
+    }
+  }
 };
 ```
-
-@@@
-
-```cc[]
-FieldNameInfo<kFieldCount> field_name_info = [&] {
-  std::array<std::string_view, kFieldCount> field_names;
-  ParsingState state;
-  __builtin_dump_struct(std::addressof(value),
-                        PrintfHijack
-                        state,
-                        field_names);
-  return FieldNameInfo{
-    .field_names = field_names,
-    .jitter = reinterpret_cast<uintptr_t>(&field_name_info) % 13 > 6,
-    .success = (state.index = kFieldCount),
-  }
-}();
-```
-
-@@@
+<!-- .element style="font-size:12pt;" -->
 
 NOTES:
 
-Why jitter:
-Want to prevent Hyrum's law dependency on any specific field names for several
-reasons.
-1. Users might want to change them. Normally you would just change it and fix
-   compilation errors, but with field names at runtime, you'll have behavior
-   changes that might not be compilation errors.
-1. If you're using this with private fields, we're still printing them! This
-   sort of punches a whole in the encapsulation and we want to be careful there.
-1. Portability. Nothing like this on compilers other than Clang.
+Credit: Daisy Hollman.

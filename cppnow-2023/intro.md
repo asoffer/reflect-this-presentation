@@ -1,41 +1,37 @@
 # Reflect `*this`!
 
-@@@@@
+<br/>
+<img src="img/mirrors.png" style="height:350px;" />
 
-## Who am I?
-
-* Software Engineer at Google
-* Mathematician in a passed life
-
-@@@
-
-## What is this talk?
-
-<img src="img/ice-cream.png" />
-
-@@@
-
-## What is this talk?
-
-<img src="img/ice-cream-mixin.png" style="width:250px; margin-top:72px;" />
-
-@@@
-
-## What is this talk?
-
-<img src="img/ice-cream-mixin-cool.png" style="width:280px; margin-left:3px;" />
-
+### Design and Implementation of a Pragmatic Mixin Library with Static Reflection
+<!-- .element style="font-size:32pt; width:80%" -->
 
 NOTES:
 
-* Mixins -- What are they. What problem do they solve.
-This is going to be a bit of a strange talk. I want to talk about mixins, what
-they are. Why they're important, and how I think we should be thinking about
-them.
-
-But this is also a talk about API design. I'm going to use mixins as a case
-study in design.
+* Who am I
+* A talk about mixins.
+* Focus on the problems they solve
+* Frame this in terms of a specific set of design criteria
 
 If I convince you of one thing, it's that the there is a ton of fertile ground
 in the design space here. In the library space, as well as at the
 language-level.
+
+@@@ <!-- .element data-auto-animate -->
+
+## The Plan
+
+1. What problem are we solving, and why?
+1. What are our priorities?
+1. Evaluate several options.
+1. Iteratively improve upon our design.
+
+@@@ <!-- .element data-auto-animate -->
+
+## The Plan
+
+1. What problem are we solving, and why?
+1. What are our priorities?
+1. Evaluate several options.
+1. Implementation
+1. Iteratively improve upon our design.

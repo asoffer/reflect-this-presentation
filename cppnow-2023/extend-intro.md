@@ -1,19 +1,10 @@
 ## `Extend`
 
 ```cc[]
-struct Person : Extend<Person>::With<EqualityExtension> {
-  std::string name;
-  std::string email;
-};
-```
-
-@@@
-
-## `Extend`
-
-```cc[]
 struct Person : Extend<Person>::With<EqualityExtension,
-                                     DebugPrintingExtension> {
+                                     OrderingExtension,
+                                     PrintingExtension,
+                                     JsonExtension> {
   std::string name;
   std::string email;
 };
@@ -24,8 +15,22 @@ struct Person : Extend<Person>::With<EqualityExtension,
 ## `Extend`
 
 ```cc[]
-class Person : public Extend<Person, 2>::With<EqualityExtension,
-                                              DebugPrintingExtension> {
+struct Person : Extend<Person>::With<OrderingExtension,
+                                     PrintingExtension,
+                                     JsonExtension> {
+  std::string name;
+  std::string email;
+};
+```
+
+@@@
+
+## `Extend`
+
+```cc[|8]
+class Person 
+    : public Extend<Person, 2>::With<EqualityExtension,
+                                     PrintingExtension> {
  public:
   explicit Person(std::string name, std::string email);
 
@@ -36,19 +41,3 @@ class Person : public Extend<Person, 2>::With<EqualityExtension,
   std::string email_;
 };
 ```
-
-@@@
-
-## `Extend`
-
-```cc[]
-template <typename NameType>
-struct Person : Extend<Person, 2>::template With<EqualityExtension,
-                                                 DebugPrintingExtension> {
-  NameType name;
-  std::string email;
-};
-```
-
-NOTES:
-

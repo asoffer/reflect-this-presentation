@@ -1,87 +1,47 @@
-## Boost.pfr
-
-<div style="column-count: 2">
-<br/>
+## `TUPLE_DEFINE_STRUCT`
 
 ```cc[]
-struct UserInfo {
-    int64_t id;
-    std::string name;
-    std::string email;
-    std::string login;
+struct Person {
+  TUPLE_DEFINE_STRUCT(
+    Person, (eq, ne, stream),
+  (std::string, name),
+  (std::string, email));
 };
 ```
-<br/>
-
-| Goal              | Rating |
-| ----------------- | ------ |
-| Evolution         |     D- |
-| Understandability |     A  |
-| Development Speed |     A+ |
-</div>
 
 NOTES:
 
-D- because you can add fields easily, but you are forced to make everything
-public. Maybe D- is to harsh here. And users get everything/anything they might
-ever want.
-
-Clarify long-term evolution isn't the goal of Boost.pfr. It's primary focus is
-dev speed.
+* Similar to BOOST_FUSION_DEFINE_STRUCT or HANA_DEFINE_STRUCT
 
 @@@
 
-## TUPLE_DEFINE_STRUCT
-
-<div style="column-count: 2">
+## Boost.PFR
 
 ```cc[]
-struct UserInfo {
-    TUPLE_DEFINE_STRUCT(
-        UserInfo,
-        (eq, ne, stream),
-    (int64_t, id),
-    (std::string, name),
-    (std::string, email),
-    (std::string, login));
+struct Person {
+  std::string name;
+  std::string email;
+};
+BOOST_PFR_FUNCTIONS_FOR(Person)
+```
+
+NOTES:
+
+Many other talks here.
+
+@@@
+
+## `Extend`
+
+```cc[]
+struct Person : Extend<Person>::With<EqualityExtension,
+                                     PrintingExtension> {
+  std::string name;
+  std::string email;
 };
 ```
 
-| Goal              | Rating |
-| ----------------- | ------ |
-| Evolution         |     B+ |
-| Understandability |     C- |
-| Development Speed |     B  |
+NOTES:
 
-</div>
-
-@@@
-
-## Extend
-
-<div style="column-count: 2">
-
-```cc[]
-struct UserInfo
-  : Extend<UserInfo>::With<
-      DebugPrintingExtension,
-      EqualityExtension> {
-    int64_t id;
-    std::string name;
-    std::string email;
-    std::string login;
-};
-```
-
-| Goal              | Rating |
-| ----------------- | ------ |
-| Evolution         |     A  |
-| Understandability |     A- |
-| Development Speed |     B+ |
-
-</div>
-
-@@@
-
-## Odin Holmes
+Probably also mention Odin Holmes' library?
 https://www.youtube.com/watch?v=VMOsz61Hg84

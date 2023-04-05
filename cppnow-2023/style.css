@@ -1,16 +1,40 @@
+:root {
+  --alt-color-1: #ebcd8d;
+  --alt-color-2: #eb9e8d;
+}
+
+.controls-arrow {
+  display: none; !important;
+}
+
+.slide-number {
+  font-size: 24pt !important;
+  margin-bottom: 0.3em;
+  margin-right: 0.3em;
+}
+
+.reveal .header {
+  position: absolute;
+  top: 0;
+  padding: 1em;
+  font-size: 48pt;
+  width: 100%;
+  z-index: -9;
+}
+
 .reveal .footer {
   position: absolute;
   bottom: 0;
   padding: 1em;
   font-size: 18pt;
   width: 100%;
-  background-color: #dad0ff;
   z-index: 9;
 }
 
 h1 {
   position: absolute;
   top: 0;
+  font-size: 48pt !important;
 }
 
 h2 {
@@ -35,11 +59,10 @@ h2 {
 }
 
 blockquote {
-  background: #eae0ff !important;
+  text-align: left;
   padding: 0.5em !important;
   border-radius: 0.5em;
   font-size: 24pt !important;
-  padding-bottom: 1.5em !important;
 }
 
 .author {
@@ -48,4 +71,30 @@ blockquote {
   text-align: right;
   bottom: 0.7em;
   right: 1em;
+}
+
+.highlight-line {
+    background-color: #ff9;
+}
+
+
+img.bordered {
+  border:1px solid #000;
+  border-radius:0.2em;
+}
+
+.edited_title {
+  color:#a00000;
+  font-family:serif;
+  position:absolute;
+  top:0.8em;
+  left:1em;
+}
+
+.blockquote1 {
+  background-color: var(--alt-color-1) !important;
+}
+
+.blockquote2 {
+  background-color: var(--alt-color-2) !important;
 }

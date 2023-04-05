@@ -1,4 +1,4 @@
-## What is a Mixin?
+## What is a mixin?
 
 NOTES:
 
@@ -8,16 +8,10 @@ to spend some time motivating why mixins are valuable, by first talking about...
 
 @@@
 
-## What <span style="color:#a00000;text-decoration:line-through"><span style="color:black">is a Mixin</span></span>?
-### <span style="color:#a00000;font-family:serif;position:absolute;top:0.7em;left:2em;">problem are we solving</span>
+## What <span style="color:#a00000;text-decoration:line-through"><span style="color:black">is a mixin</span></span>?
+### <span class="edited_title">problem are we solving</span>
 
-<style>
-.highlight-line {
-    background-color: #ff9;
-}
-</style>
-
-```cc[|1-3,7|5-6,9-40]
+```cc[|1-3,7|5-6,9-41]
 struct Person {
   std::string name;
   std::string email;
@@ -34,11 +28,7 @@ struct std::hash<Person> {
   }
 };
 
-template <typename H>
-H AbslHashValue(H h, const Person& p) {
-  return H::combine(std::move(h), p.name, p.email);
-}
-
+// Objectionable on both readability and moral grounds!
 template <>
 struct std::less<Person> {
   size_t operator()(const Person& lhs, const Person& rhs) const {
@@ -59,76 +49,114 @@ std::string ToJson(const Person& p) {
                          std::quoted(p.name), std::quoted(p.email));
 }
 ```
-<!-- .element style="font-size:6pt; width:45%;" class="fragment" data-fragment-index="1" -->
-
-NOTES:
-
-...the problem we're trying to solve.
+<!-- .element style="font-size:6pt; width:37%;" class="fragment" data-fragment-index="1" -->
 
 @@@
 
-## A simple Person struct.
+## What <span style="color:#a00000;text-decoration:line-through"><span style="color:black">is a mixin</span></span>?
+### <span class="edited_title">problem are we solving</span>
 
-<pre style="font-size:8pt"><code data-line-numbers class="cc hljs cpp">struct Person {
-  std::string name;
-  std::string email;
+```py[|1-4|5-30]
+class Person:
+    def __init__(self, name: str, email: str):
+        self.name = name
+        self.email = email
 
-  // Objectionable on both readability and moral grounds!
-  friend bool operator<=>(const Person&, const Person&) = default;
-};
+    def __eq__(self, other: Any) -> bool:
+        if not isinstance(other, Person):
+            return False
+        return (self.name == other.name 
+               and self.email == other.email)
 
-template &lt;&gt;
-struct std::hash&lt;Person&gt; {
-  size_t operator()(const Person& p) const {
-    return hash_combine(std::hash&lt;std::string&gt;{}(p.name),
-                        std::hash&lt;std::string&gt;{}(p.email));
-  }
-};
+    def __ne__(self, other: Any) -> bool:
+        return not (self == other)
 
-template &lt;typename H&gt;
-H AbslHashValue(H h, const Person& p) {
-  return H::combine(std::move(h), p.name, p.email);
-}
+    # Objectionable on both readability and moral grounds!
+    def __lt__(self, other: Any) -> bool:
+        if self.name < other.name:
+            return True
+        elif self.name > other.name:
+            return False
+        return self.email < other.email
 
-std::ostream& operator&lt;&lt;(std::ostream& os, const Person& p) {
-  return os &lt;&lt; "Person"
-            &lt;&lt; "[ name: " &lt;&lt; std::quoted(p.name)
-            &lt;&lt; ", email: " &lt;&lt; std::quoted(p.email) &lt;&lt; " ]";
-}
+    def __hash__(self) -> int:
+        return hash((self.name, self.email))
 
-std::string ToJson(const Person& p) {
-  return absl::StrFormat("{ name: %v, email: %v }",
-                         std::quoted(p.name), std::quoted(p.email));
-}
-</code></pre>
+    def to_dict(self) -> Dict[str, Any]:
+        return {"name": self.name, "email": self.email}
 
-NOTES:
-
-operator<=> is no good here. It does not make sense to say one person is less
-than another. But sometimes we do want to put people into a `std::set`.
+    def to_json(self) -> str:
+        return json.dumps(self.to_dict())
+```
+<!-- .element style="font-size:7pt; width:38%;" -->
 
 @@@
 
-## What <span style="color:#a00000;text-decoration:line-through"><span style="color:black">is a Mixin</span></span>?
-### <span style="color:#a00000;font-family:serif;position:absolute;top:0.7em;left:2em;">problem are we solving</span>
+## What <span style="color:#a00000;text-decoration:line-through"><span style="color:black">is a mixin</span></span>?
+### <span class="edited_title">problem are we solving</span>
 
-Boilerplate.
+### Boilerplate
 
-* Easy to make copy-paste errors. <!-- .element: class="fragment" -->
-* Hard to keep up to date. <!-- .element: class="fragment" -->
-* Reduced readability. <!-- .element: class="fragment" -->
+@@@
+
+## What <span style="color:#a00000;text-decoration:line-through"><span style="color:black">is a mixin</span></span>?
+### <span class="edited_title">problem are we solving</span>
+
+<img src="img/printing-plate.jpg" class="bordered" width="60%" />
 
 NOTES:
 
-Aside on why it's called boilerplate.
+* Early newspare syndication was done by mailing around printing plates.
+* They resembled plates used to make boilers and so they were often called "boilerplates." The text on them was called "boilerplate text."
+* Usually full of fluff pieces (timeliness) so boilerplate text became synonymous with "filler."
+* Easy to make copy-paste errors.
+* Hard to keep up to date.
+* Reduced readability.
+* Aside on why it's called boilerplate.
 
 @@@
 
 ## Boilerplate reduction techniques
 
+<div class="fragment">
+
 * Code generators
 * Macros
-* Wizardry
+* Actual magic
+* Mixins
+</div>
+
+@@@
+
+## Boilerplate reduction techniques
+
+* <span style="color:#a00000;text-decoration:line-through"><span style="color:black">Code generators</span></span>
+* Macros
+* Actual magic
+* Mixins
+
+NOTES:
+I'm going to rule out code generation immediately. Code generators are hostile to refactoring at scale.
+
+@@@
+
+## Boilerplate reduction techniques
+
+* <span style="color:#a00000;text-decoration:line-through"><span style="color:black">Code generators</span></span>
+* <span style="color:#a00000;text-decoration:line-through"><span style="color:black">Macros</span></span>
+* Actual magic
+* Mixins
+
+NOTES:
+Macros are a form of code generator.
+
+@@@
+
+## Boilerplate reduction techniques
+
+* <span style="color:#a00000;text-decoration:line-through"><span style="color:black">Code generators</span></span>
+* <span style="color:#a00000;text-decoration:line-through"><span style="color:black">Macros</span></span>
+* <span style="color:#a00000;text-decoration:line-through"><span style="color:black">Actual magic</span></span>
 * Mixins
 
 NOTES:
