@@ -5,6 +5,12 @@
 *  Safety & Testing
 *  Development Speed
 
+NOTES:
+
+We're going to look at these examples and assign them grades according to this rubric.
+
+Having the rubric ahead of time allows us to think methodically and communicate
+to our teammates about why we believe one option is better than another.
 
 @@@
 
@@ -30,6 +36,8 @@ std::ostream& operator<<(std::ostream& os, const Person& p) {
             << "[ name: " << std::quoted(p.name)
             << ", email: " << std::quoted(p.email) << " ]";
 }
+
+<br/>
 
 ```
 <!-- .element style="font-size:8pt;" -->
@@ -58,21 +66,22 @@ BOOST_PFR_FUNCTIONS_FOR(Person)
 
 <br/>
 <br/>
-<br/>
 
 | Goal              | Grade |
 | ----------------- | ------ |
 | Evolution         | C  <!-- .element class="fragment" data-fragment-index="1" --> |
-| Understandability | A  <!-- .element class="fragment" data-fragment-index="1" --> |
+| Understandability | A- <!-- .element class="fragment" data-fragment-index="1" --> |
 | Safety & Testing  | A+ <!-- .element class="fragment" data-fragment-index="1" --> |
 | Dev. Speed        | A+ <!-- .element class="fragment" data-fragment-index="1" --> |
 </div>
 
 NOTES:
 
-D- because you can add fields easily, but you are forced to make everything
-public. Maybe D- is to harsh here. And users get everything/anything they might
+C because you can add fields easily, but you are forced to make everything
+public. Maybe C is to harsh here. And users get everything/anything they might
 ever want.
+
+If you ever need to specify one of the functions manually, you need to do so with all of them.
 
 Clarify long-term evolution isn't the goal of Boost.pfr. It's primary focus is
 dev speed.
@@ -96,7 +105,7 @@ struct Person {
 
 | Goal              | Grade |
 | ----------------- | ----- |
-| Evolution         | B+ <!-- .element class="fragment" data-fragment-index="1" --> |
+| Evolution         | B- <!-- .element class="fragment" data-fragment-index="1" --> |
 | Understandability | C- <!-- .element class="fragment" data-fragment-index="1" --> |
 | Safety & Testing  | A+ <!-- .element class="fragment" data-fragment-index="1" --> |
 | Dev. Speed        | B  <!-- .element class="fragment" data-fragment-index="1" --> |
@@ -105,8 +114,10 @@ struct Person {
 
 NOTES:
 
-* Similar to BOOST_FUSION_DEFINE_STRUCT or HANA_DEFINE_STRUCT
-
+* Evolution -- Improvement over Boost.PFR in that the capabilities are listed explicitly, but it only supports structs.
+* Understandability -- Macro is magic to most users. We are routinely asked why std::pair doesn't work.
+* Safety & Testing -- no problems here.
+* Dev speed -- Slowed down just due to the unnatural syntax.
 @@@
 
 ## Extend
@@ -135,5 +146,10 @@ struct Person
 </div>
 
 NOTES:
+
+* Evolution -- Users state exactly which capabilities they want to provide. If any one operation needs to be specified manually, that's possible. Their struct can become a class. 
+* Understandability -- Pretty good. Users are already familiar with some functionality being "hidden" in a base class, which is what it looks like here.
+* Safety & Testing -- 
+* Development speed -- 
 
 This is unfair. I set the goals.

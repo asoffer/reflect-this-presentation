@@ -1,4 +1,4 @@
-## `Extend`
+## Extend
 
 ```cc[]
 struct Person : Extend<Person>::With<EqualityExtension,
@@ -12,7 +12,7 @@ struct Person : Extend<Person>::With<EqualityExtension,
 
 @@@
 
-## `Extend`
+## Extend
 
 ```cc[]
 struct Person : Extend<Person>::With<OrderingExtension,
@@ -25,7 +25,7 @@ struct Person : Extend<Person>::With<OrderingExtension,
 
 @@@
 
-## `Extend`
+## Extend
 
 ```cc[|8]
 class Person 

@@ -2,16 +2,14 @@
 
 NOTES:
 
-Actually, we can't start here. You may already know what a mixin is, but I want
-to spend some time motivating why mixins are valuable, by first talking about...
-
+Actually, we can't start here.
 
 @@@
 
-## What <span style="color:#a00000;text-decoration:line-through"><span style="color:black">is a mixin</span></span>?
+## What <span class="crossed_out"><span class="wrong_content">is a mixin</span></span>?
 ### <span class="edited_title">problem are we solving</span>
 
-```cc[|1-3,7|5-6,9-41]
+```cc[|1-3,7|5-6,9-35]
 struct Person {
   std::string name;
   std::string email;
@@ -28,7 +26,6 @@ struct std::hash<Person> {
   }
 };
 
-// Objectionable on both readability and moral grounds!
 template <>
 struct std::less<Person> {
   size_t operator()(const Person& lhs, const Person& rhs) const {
@@ -49,11 +46,24 @@ std::string ToJson(const Person& p) {
                          std::quoted(p.name), std::quoted(p.email));
 }
 ```
-<!-- .element style="font-size:6pt; width:37%;" class="fragment" data-fragment-index="1" -->
+<!-- .element style="font-size:6pt; width:38%;" class="fragment" data-fragment-index="1" -->
+
+NOTES:
+
+We need to start by understanding the problem.
+
+---
+
+* Intentionally small
+
+---
+
+* The rest is mostly noise. Not unimportant, just uninteresting.
+* Not C++ specific
 
 @@@
 
-## What <span style="color:#a00000;text-decoration:line-through"><span style="color:black">is a mixin</span></span>?
+## What <span class="crossed_out"><span class="wrong_content">is a mixin</span></span>?
 ### <span class="edited_title">problem are we solving</span>
 
 ```py[|1-4|5-30]
@@ -90,78 +100,68 @@ class Person:
 ```
 <!-- .element style="font-size:7pt; width:38%;" -->
 
+NOTES:
+
+Repeat: There's a lot of code here.
+
+---
+
+Only a small portion is important
+
+---
+
+Yet we have to write a lot of repetitive code.
+
+We have a word for this problem.
+
 @@@
 
-## What <span style="color:#a00000;text-decoration:line-through"><span style="color:black">is a mixin</span></span>?
+## What <span class="crossed_out"><span class="wrong_content">is a mixin</span></span>?
 ### <span class="edited_title">problem are we solving</span>
 
 ### Boilerplate
 
+NOTES:
+
+* Reduced readability.
+* Easy to make copy-paste errors.
+* Hard to keep up to date. (Brittle)
+* Saps time away from more important/interesting problems.
+
 @@@
 
-## What <span style="color:#a00000;text-decoration:line-through"><span style="color:black">is a mixin</span></span>?
+## What <span class="crossed_out"><span class="wrong_content">is a mixin</span></span>?
+### <span class="edited_title">problem are we solving</span>
+
+<img src="img/rolled-steel.jpg" class="bordered" width="53%" />
+
+NOTES:
+
+* Refers to rolled steel used to make boilers.
+* At first glance, has nothing to do with the repetitiveness.
+* The term actually comes from...
+
+@@@
+
+## What <span class="crossed_out"><span class="wrong_content">is a mixin</span></span>?
 ### <span class="edited_title">problem are we solving</span>
 
 <img src="img/printing-plate.jpg" class="bordered" width="60%" />
 
 NOTES:
 
-* Early newspare syndication was done by mailing around printing plates.
-* They resembled plates used to make boilers and so they were often called "boilerplates." The text on them was called "boilerplate text."
-* Usually full of fluff pieces (timeliness) so boilerplate text became synonymous with "filler."
-* Easy to make copy-paste errors.
-* Hard to keep up to date.
-* Reduced readability.
-* Aside on why it's called boilerplate.
+* ...printing plates used early on for newspapers.
+* These plates were shipped around to various newspapers to syndicate content. They resembled the rolled steel used for boilers and so they were often referred to as "boilerplates." The text on them was called "boilerplate text."
+* Because these plates had to be shipped around the country and that was slow, you would never print interesting or timely information on them. They typically had advertisements or filler pieces.
+* So boilerplate text became synonymous with "filler" material.
 
 @@@
 
-## Boilerplate reduction techniques
+## What <span class="crossed_out"><span class="wrong_content">is a mixin</span></span>?
+### <span class="edited_title">problem are we solving</span>
 
-<div class="fragment">
+> **What:** Boilerplate
+<!-- .element class="blockquote1" style="font-size:20pt !important;" -->
 
-* Code generators
-* Macros
-* Actual magic
-* Mixins
-</div>
-
-@@@
-
-## Boilerplate reduction techniques
-
-* <span style="color:#a00000;text-decoration:line-through"><span style="color:black">Code generators</span></span>
-* Macros
-* Actual magic
-* Mixins
-
-NOTES:
-I'm going to rule out code generation immediately. Code generators are hostile to refactoring at scale.
-
-@@@
-
-## Boilerplate reduction techniques
-
-* <span style="color:#a00000;text-decoration:line-through"><span style="color:black">Code generators</span></span>
-* <span style="color:#a00000;text-decoration:line-through"><span style="color:black">Macros</span></span>
-* Actual magic
-* Mixins
-
-NOTES:
-Macros are a form of code generator.
-
-@@@
-
-## Boilerplate reduction techniques
-
-* <span style="color:#a00000;text-decoration:line-through"><span style="color:black">Code generators</span></span>
-* <span style="color:#a00000;text-decoration:line-through"><span style="color:black">Macros</span></span>
-* <span style="color:#a00000;text-decoration:line-through"><span style="color:black">Actual magic</span></span>
-* Mixins
-
-NOTES:
-
-Code generators -- solve the problem for code writers, but not for code readers.
-They're also hostile to automatic refactoring tools.
-Macros -- Macros are just poorly designed code generators
-Magic -- This is actually a real option in some cases.
+> **Why:** Readability, brittleness, development speed
+<!-- .element class="blockquote2" style="font-size:20pt !important;" -->

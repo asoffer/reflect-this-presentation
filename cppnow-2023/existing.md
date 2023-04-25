@@ -1,4 +1,4 @@
-## `TUPLE_DEFINE_STRUCT`
+## TUPLE_DEFINE_STRUCT
 
 ```cc[]
 struct Person {
@@ -31,7 +31,7 @@ Many other talks here.
 
 @@@
 
-## `Extend`
+## Extend
 
 ```cc[]
 struct Person : Extend<Person>::With<EqualityExtension,

@@ -1,21 +1,9 @@
-## Other features
+## Awesome features we added
 
 @@@
 
-## <span style="color:#a00000;text-decoration:line-through"><span style="color:black">Other features</span></span>
-### <span class="edited_title">Iterative improvements</span>
-
-NOTES:
-
-@@@
-
-TODO: This slide
-User feedback + (4 priorities)
-
-@@@
-
-## User feedback
-
+## <span style="color:#a00000;text-decoration:line-through"><span style="color:black">Awesome features we added</span></span>
+### <span class="edited_title">Iterative improvements fueled by user feedback</span>
 
 <div>
 <div style="width:50%; float:left">
@@ -36,7 +24,7 @@ User feedback + (4 priorities)
 <!-- .element class="fragment blockquote2" data-fragment-index="2" style="font-size:16pt !important; width:90%"-->
 
 > **Evolution:**
-> We must reserve the right for users to change their structs.
+> "Weird things are happening with C++20."
 <!-- .element class="fragment blockquote1" data-fragment-index="4" style="font-size:16pt !important; width:90%"-->
 
 

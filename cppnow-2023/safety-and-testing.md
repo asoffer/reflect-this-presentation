@@ -70,7 +70,7 @@ template <typename... Extensions>
 struct ExtensionSet {
   constexpr ExtensionSet() : Extensions()... {
     if (false) {
-      (ForceInstantiateDependentExpressions(static_cast<Extensions&>(*this)),
+      (static_cast<Extensions&>(*this).ForceInstantiateDependentExpressions(),
        ...);
     }
   }

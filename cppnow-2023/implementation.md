@@ -10,18 +10,18 @@ struct Extend final {
 ```
 <!-- .element data-id="code-animation" class="fragment" data-fragment-id="1" -->
 
-@@@ <!-- .element data-auto-animate -->
+NOTES:
 
-## Implementation: Overview
+I want to talk about the implementation. It's not really important from the design perspective, but when we later talk about iterative improvements, it's important that we have some understanding.
 
-<pre data-id="code-animation"><code data-trim data-line-numbers>
-template &lt;typename T, int FieldCount, typename ExtensionSpec&gt;
-struct ExtensionSet;
+---
 
+First define the structure that lets us write `Extend<T>::With`
 
-
-&nbsp;
-</code></pre>
+Three interesting things on this slide:
+* FieldCount -- `-1` specifies that we will try to deduce the count.
+* Dependencies -- This allows us to compute unspecified-but-depended-on extensions as I'll show in a few slides.
+* ExtensionSet -- Base class that allows us to inherit from all those extensions.
 
 @@@ <!-- .element data-auto-animate -->
 
@@ -32,7 +32,7 @@ template &lt;typename T, int FieldCount, typename ExtensionSpec&gt;
 struct ExtensionSet;
 
 template &lt;typename T, int FieldCount, typename... Extensions&gt;
-struct ExtensionSet &lt;T, FieldCount, TypeList&lt;Extensions...&gt;&gt;
+struct ExtensionSet&lt;T, FieldCount, TypeList&lt;Extensions...&gt;&gt;
   : Extensions... {};
 </code></pre>
 
@@ -58,13 +58,13 @@ using Dependencies = decltype(internal::FindAllDependencies(
 ```cc[|4-5|7-10|11-13|15]
 template <typename... As, typename... Bs>
 constexpr auto FindAllDependencies(
-    TypeList<As...> unprocessed, TypeList<Bs...> processed)) {
+    TypeList<As...> unprocessed, TypeList<Bs...> processed) {
   if constexpr (sizeof...(As) == 0) {
     return processed;
   } else {
     using first_t = First<As...>;
     using tail_t = Tail<As...>;
-    if constexpr (std::is_same_v<first_t, Bs> || ...) {
+    if constexpr ((std::is_same_v<first_t, Bs> || ...)) {
       return FindAllDependencies(tail_t{}, processed);
     } else if constexpr (requires { typename first_t::deps; }) {
       return FindAllDependencies(tail_t{} + typename first_t::deps{},
@@ -76,6 +76,10 @@ constexpr auto FindAllDependencies(
 }
 ```
 <!-- .element style="font-size:12pt; width:80%;" -->
+
+NOTES:
+
+Testament to compile-time programming improvements over the last decade.
 
 @@@
 

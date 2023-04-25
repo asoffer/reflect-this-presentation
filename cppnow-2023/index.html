@@ -36,10 +36,20 @@
       </div>
 
       <div class="slides">
+        <section data-background-image="img/title.png">
+          <aside class="notes">
+            <ul>
+              <li>Talk about mixins and reflection, but primarily design.</li>
+              <li>I want to walk you through how I approach design.</li>
+              <li>My goal is partially to present yet another reflection library to show you more points in the design space, but it's primarily to work through a case study in design.</li>
+              <li>You may not like the final outcome of what we've designed but I hope to convince you that it addresses the problems we set out to solve.</li>
+            </ul>
+          </aside>
+        </section>
         <section data-markdown="intro.md" data-separator="@@@@@" data-separator-vertical="@@@" data-separator-notes="^NOTES:"></section>
         <section data-markdown="motivation.md" data-separator="@@@@@" data-separator-vertical="@@@" data-separator-notes="^NOTES:"></section>
-        <section data-markdown="mixin.md" data-separator="@@@@@" data-separator-vertical="@@@" data-separator-notes="^NOTES:"></section>
         <section data-markdown="design-goals.md" data-separator="@@@@@" data-separator-vertical="@@@" data-separator-notes="^NOTES:"></section>
+        <section data-markdown="mixin.md" data-separator="@@@@@" data-separator-vertical="@@@" data-separator-notes="^NOTES:"></section>
         <section data-markdown="existing.md" data-separator="@@@@@" data-separator-vertical="@@@" data-separator-notes="^NOTES:"></section>
         <section data-markdown="extend-intro.md" data-separator="@@@@@" data-separator-vertical="@@@" data-separator-notes="^NOTES:"></section>
         <section data-markdown="existing-grades.md" data-separator="@@@@@" data-separator-vertical="@@@" data-separator-notes="^NOTES:"></section>
@@ -64,7 +74,7 @@
       // - https://revealjs.com/config/
       Reveal.initialize({
         hash: true,
-        slideNumber: true,
+        slideNumber: 'c',
         transition: 'none',
         backgroundTransition: 'none',
         navigationMode: 'linear',
@@ -74,6 +84,22 @@
 
         // Learn about plugins: https://revealjs.com/plugins/
         plugins: [RevealMarkdown, RevealHighlight, RevealNotes, RevealZoom],
+      }).then(() => {
+        let slideNumber = document.getElementsByClassName('slide-number')[0];
+        let footer = document.getElementsByClassName('footer')[0];
+        slideNumber.setAttribute('style', 'display:none');
+        footer.setAttribute('style', 'display:none');
+      });
+      Reveal.on('slidechanged', event => {
+        let slideNumber = document.getElementsByClassName('slide-number')[0];
+        let footer = document.getElementsByClassName('footer')[0];
+        if (event.currentSlide.getAttribute('data-background-image') !== null) {
+          slideNumber.setAttribute('style', 'display:none');
+          footer.setAttribute('style', 'display:none');
+        } else {
+          slideNumber.setAttribute('style', 'display:block');
+          footer.setAttribute('style', 'display:block');
+        }
       });
     </script>
   </body>

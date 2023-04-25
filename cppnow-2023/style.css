@@ -3,6 +3,11 @@
   --alt-color-2: #eb9e8d;
 }
 
+@font-face {
+    font-family: delicious;
+    src: url("./fonts/Caveat/Caveat-VariableFont_wght.ttf");
+}
+
 .controls-arrow {
   display: none; !important;
 }
@@ -41,8 +46,12 @@ h2 {
   position: absolute;
   top: 0;
   left: 0;
-  font-family: serif !important;
   font-size: 48pt !important;
+  text-transform: none !important;
+}
+
+h3 {
+  text-transform: none !important;
 }
 
 .present {
@@ -85,10 +94,19 @@ img.bordered {
 
 .edited_title {
   color:#a00000;
-  font-family:serif;
+  font-family: delicious;
   position:absolute;
   top:0.8em;
   left:1em;
+}
+
+.crossed_out {
+  color: #a00000;
+  text-decoration: line-through;
+}
+
+.wrong_content {
+  color: var(--r-main-color);
 }
 
 .blockquote1 {
@@ -96,5 +114,21 @@ img.bordered {
 }
 
 .blockquote2 {
+  background-color: var(--alt-color-2) !important;
+}
+
+.name1 {
+  font-size: 16pt !important;
+  margin: 1em 0.6em !important;
+  padding: 0 0.5em !important;
+  width: 11em !important;
+  background-color: var(--alt-color-1) !important;
+}
+
+.name2 {
+  font-size: 16pt !important;
+  margin: 1em 0.6em !important;
+  padding: 0 0.5em !important;
+  width: 11em !important;
   background-color: var(--alt-color-2) !important;
 }

@@ -1,8 +1,8 @@
 ## What's next?
 
 * Improved testing facilities.
-* C++23, Deducing `this`, removes most need for CRTP.
-* Want: Robust and portable access to field names?
+* C++23, Deducing `this`.
+* Portable access to field names?
 * Basis for a strong types library.
 * Improved field-counting.
 
