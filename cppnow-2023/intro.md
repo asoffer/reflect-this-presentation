@@ -14,7 +14,7 @@ NOTES:
 1. What problem are we solving, and why?
 1. What are our priorities?
 1. Evaluate the design space.
-1. Implementation it!
+1. Implement it!
 1. Iteratively improve upon our design.
 
 NOTES:
@@ -22,7 +22,7 @@ NOTES:
 * Talk structured in the same way I think about design.
 * Problem: If you can't articulate what the problem is *and* why it's a problem, you'll never convince anyone it's worth solving. -- If you're familiar with mixins, you already understand this, but bear with me.
 * Priorities: Important to state explicitly. Tradeoffs.
-* Evaluate: Because tradeoffs, you'll want to explore several different directions.
+* Evaluate: Because tradeoffs, you'll want to explore several different directions. This is where you start to make some design decisions.
 * Implement: Only once you understand the problem space.
 * Iterate: You'll get it wrong the first try.
 

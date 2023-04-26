@@ -1,25 +1,12 @@
-## What is the competition?
+## What techniques can we leverage?
 
 NOTES:
 
-By now you know the drill. I start with a title indicating a common way we
-sometimes think about design that's not super healthy.
+I know of 4
 
 @@@
 
-## What <span class="crossed_out"><span class="wrong_content">is the competition</span></span>?
-### <span class="edited_title">can we leverage/learn from</span>
-
-NOTES:
-
-Then I cross it out and replace it with a better framing.
-
-@@@
-
-## What <span class="crossed_out"><span class="wrong_content">is the competition</span></span>?
-### <span class="edited_title">can we leverage/learn from</span>
-
-#### Boilerplate reduction techniques
+## What techniques can we leverage?
 
 * Code generators
 * Macros
@@ -34,10 +21,7 @@ NOTES:
 
 @@@
 
-## What <span class="crossed_out"><span class="wrong_content">is the competition</span></span>?
-### <span class="edited_title">can we leverage/learn from</span>
-
-#### Boilerplate reduction techniques
+## What techniques can we leverage?
 
 * <span class="crossed_out"><span class="wrong_content">Code generators</span></span>
 * Macros
@@ -52,10 +36,7 @@ Solve the problem for code writers, but not for code readers.
 
 @@@
 
-## What <span class="crossed_out"><span class="wrong_content">is the competition</span></span>?
-### <span class="edited_title">can we leverage/learn from</span>
-
-#### Boilerplate reduction techniques
+## What techniques can we leverage?
 
 * <span class="crossed_out"><span class="wrong_content">Code generators</span></span>
 * <span class="crossed_out"><span class="wrong_content">Macros</span></span>
@@ -68,10 +49,7 @@ Macros are a form of code generator.
 
 @@@
 
-## What <span class="crossed_out"><span class="wrong_content">is the competition</span></span>?
-### <span class="edited_title">can we leverage/learn from</span>
-
-#### Boilerplate reduction techniques
+## What techniques can we leverage?
 
 * <span class="crossed_out"><span class="wrong_content">Code generators</span></span>
 * <span class="crossed_out"><span class="wrong_content">Macros</span></span>
@@ -81,10 +59,7 @@ Macros are a form of code generator.
 
 @@@
 
-## What <span class="crossed_out"><span class="wrong_content">is the competition</span></span>?
-### <span class="edited_title">can we leverage/learn from</span>
-
-#### Boilerplate reduction techniques
+## What techniques can we leverage?
 
 * <span class="crossed_out"><span class="wrong_content">Code generators</span></span>
 * <span class="crossed_out"><span class="wrong_content">Macros</span></span>
@@ -94,10 +69,7 @@ Macros are a form of code generator.
 
 @@@
 
-## What <span class="crossed_out"><span class="wrong_content">is the competition</span></span>?
-### <span class="edited_title">can we leverage/learn from</span>
-
-#### Boilerplate reduction techniques
+## What techniques can we leverage?
 
 * <span class="crossed_out"><span class="wrong_content">Code generators</span></span>
 * <span class="crossed_out"><span class="wrong_content">Macros</span></span>
@@ -107,12 +79,9 @@ Macros are a form of code generator.
 
 @@@
 
-## What <span class="crossed_out"><span class="wrong_content">is the competition</span></span>?
-### <span class="edited_title">can we leverage/learn from</span>
+## <span style="vertical-align:top;">Mixins in</span> ![Python](img/python.svg) <!-- .element style="height:64px; position:relative; top:-0.1em;" -->
 
-#### Mixins in&nbsp;![Python](img/python.svg) <!-- .element style="height:64px; position:relative; top:1em;" -->
-
-```py[|3]
+```py[]
 class Eq:
   def __eq__(self, other):
     return self.__dict__ == other.__dict__
@@ -125,12 +94,9 @@ class Person(Eq):
 
 @@@
 
-## What <span class="crossed_out"><span class="wrong_content">is the competition</span></span>?
-### <span class="edited_title">can we leverage/learn from</span>
+## <span style="vertical-align:top;">Mixins in</span> ![Javascript](img/javascript.png) <!-- .element style="height:64px; position:relative; top:-0.3em;" -->
 
-#### Mixins in&nbsp;![Javascript](img/javascript.png) <!-- .element style="height:64px; position:relative; top:1em;" -->
-
-```javascript[|4]
+```javascript[]
 let toStringMixin = {
   toString() {
     let s = "{\n";
@@ -155,12 +121,9 @@ Object.assign(Person.prototype, toStringMixin);
 
 @@@ <!-- element: data-auto-animate -->
 
-## What <span class="crossed_out"><span class="wrong_content">is the competition</span></span>?
-### <span class="edited_title">can we leverage/learn from</span>
+## <span style="vertical-align:top;">Mixins in</span> ![Rust](img/rust.svg) <!-- .element style="height:64px; position:relative; top:-0.1em;" -->
 
-#### Mixins in&nbsp;![Rust](img/rust.svg) <!-- .element style="height:64px; position:relative; top:1em;" -->
-
-```rust[|1]
+```rust[]
 #[derive(Eq)]
 struct Person {
   name: String,
@@ -171,13 +134,9 @@ struct Person {
 
 @@@
 
-## What <span class="crossed_out"><span class="wrong_content">is the competition</span></span>?
-### <span class="edited_title">can we leverage/learn from</span>
+## <span style="vertical-align:top;">Mixins in</span> ![C++](img/cpp.png) <!-- .element style="height:64px; position:relative; top:-0.1em;" -->
 
-#### Mixins in&nbsp;![C++](img/cpp.png) <!-- .element style="height:64px; position:relative; top:1em;" -->
-
-
-```cc[|5-6]
+```cc[]
 struct Person {
   std::string name;
   std::string email;

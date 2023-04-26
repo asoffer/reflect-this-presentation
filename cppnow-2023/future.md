@@ -13,8 +13,8 @@
 ```cc[]
 template <typename T,
           typename UnderlyingType,
-          template <typename> typename... Extensions>
-class StrongType : Extend<T, 1>::template With<Extensions...> {
+          template <typename> typename... Exts>
+class StrongType : Extend<T, 1>::template With<Exts...> {
  public:
   explicit StrongType(T value) : value_(std::move(value)) {}
 

@@ -15,7 +15,7 @@ struct PrintingExtension {
 
     std::apply([&](auto&... fields) {
       ((os << std::exchange(separator, ", ") << fields), ...);
-    }, PrintingExtension::Unpack(value));
+    }, Unpack(value));
 
     return os << " }";
   }
@@ -25,8 +25,11 @@ struct PrintingExtension {
 
 NOTES:
 
-Our original implementation looked like this, but it was definitely lacking.
+* Our original implementation looked like this, but it was definitely lacking.
 With TUPLE_DEFINE_STRUCT, people had access to the field names.
+
+* Had some ideas, but they needed compiler hooks, and Clang's hooks were not
+  sufficiently robust that we were comfortably relying on them.
 
 @@@
 
@@ -45,7 +48,12 @@ With TUPLE_DEFINE_STRUCT, people had access to the field names.
 
 NOTES:
 
-TODO: Show the first bit, then the top comment then the response.
+* Then Richard fixed `__builtin_dump_struct`
+
+---
+
+* I love these comments so much. Yes you can use this for reflection. Yes, you
+  do need to parse the input.
 
 @@@
 
@@ -91,8 +99,6 @@ FieldNameInfo<kFieldCount> field_name_info = [&] {
   }
 }();
 ```
-
-@@@
 
 NOTES:
 

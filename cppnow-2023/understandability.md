@@ -1,7 +1,7 @@
 ## Understandability
 
-> "Using &nbsp;`Extend`&nbsp; with my class gives me incomprehensible error messages."
-<!-- .element class="blockquote1" -->
+> "Using &nbsp;`Extend`&nbsp; with my class gives me useless error messages."
+<!-- .element class="blockquote2" -->
 
 NOTES:
 

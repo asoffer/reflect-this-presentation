@@ -7,14 +7,16 @@
 
 NOTES:
 
-We're going to look at these examples and assign them grades according to this rubric.
+* Not enough to just have designed something.
 
-Having the rubric ahead of time allows us to think methodically and communicate
-to our teammates about why we believe one option is better than another.
+* We're going to look at these examples and assign them grades according to this rubric.
+
+* Having the rubric ahead of time allows us to think methodically and communicate
+  to our teammates about why we believe one option is better than another.
 
 @@@
 
-## Write it yourself 
+## Write it yourself
 
 <div style="column-count: 2">
 
@@ -37,18 +39,23 @@ std::ostream& operator<<(std::ostream& os, const Person& p) {
             << ", email: " << std::quoted(p.email) << " ]";
 }
 
-<br/>
-
 ```
 <!-- .element style="font-size:8pt;" -->
 
+<br/>
+
 | Goal              | Grade |
 | ----------------- | ----- |
-| Evolution         | D  <!-- .element class="fragment" data-fragment-index="1" --> |
+| Evolution         | B+ <!-- .element class="fragment" data-fragment-index="1" --> |
 | Understandability | A+ <!-- .element class="fragment" data-fragment-index="1" --> |
-| Safety & Testing  | C- <!-- .element class="fragment" data-fragment-index="1" --> |
-| Dev. Speed        | C  <!-- .element class="fragment" data-fragment-index="1" --> |
+| Safety & Testing  | D  <!-- .element class="fragment" data-fragment-index="1" --> |
+| Dev. Speed        | C- <!-- .element class="fragment" data-fragment-index="1" --> |
 
+NOTES:
+
+* Evolution -- Requires lots of changes. Adding a field is error prone.
+* Understandability -- By definition, nothing tricky going on here.
+* Safety & testing -- Easy to forget to add fields or order them incorrectly.
 @@@
 
 ## Boost.PFR
@@ -139,7 +146,7 @@ struct Person
 | Goal              | Grade |
 | ----------------- | ----- |
 | Evolution         | A  <!-- .element class="fragment" data-fragment-index="1" --> |
-| Understandability | A  <!-- .element class="fragment" data-fragment-index="1" --> |
+| Understandability | A- <!-- .element class="fragment" data-fragment-index="1" --> |
 | Safety & Testing  | A+ <!-- .element class="fragment" data-fragment-index="1" --> |
 | Dev. Speed        | A  <!-- .element class="fragment" data-fragment-index="1" --> |
 
@@ -152,4 +159,8 @@ NOTES:
 * Safety & Testing -- 
 * Development speed -- 
 
-This is unfair. I set the goals.
+This is unfair. I set the goals. This is okay... even expected.
+
+Now that we understand and can articulate the problem we have and why our
+proposed solution improves on our goals over other techniques, we can start
+talking about the implementation.

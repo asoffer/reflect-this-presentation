@@ -12,7 +12,7 @@ struct Extend final {
 
 NOTES:
 
-I want to talk about the implementation. It's not really important from the design perspective, but when we later talk about iterative improvements, it's important that we have some understanding.
+It's not really important from the design perspective, but when we later talk about iterative improvements, it's important that we have some understanding.
 
 ---
 
@@ -28,12 +28,12 @@ Three interesting things on this slide:
 ## Implementation: Overview
 
 <pre data-id="code-animation"><code data-trim data-line-numbers>
-template &lt;typename T, int FieldCount, typename ExtensionSpec&gt;
+template &lt;typename T, int FieldCount, typename ExtSpec&gt;
 struct ExtensionSet;
 
-template &lt;typename T, int FieldCount, typename... Extensions&gt;
-struct ExtensionSet&lt;T, FieldCount, TypeList&lt;Extensions...&gt;&gt;
-  : Extensions... {};
+template &lt;typename T, int FieldCount, typename... Exts&gt;
+struct ExtensionSet&lt;T, FieldCount, TypeList&lt;Exts...&gt;&gt;
+  : Exts... {};
 </code></pre>
 
 NOTES:
@@ -147,8 +147,7 @@ template &lt;typename T&gt;
 struct EqualityExtension : Extension&lt;EqualityExtension, T&gt; {
 
   friend bool operator==(const T& lhs, const T& rhs) {
-    return EqualityExtension::Unpack(lhs) ==
-             EqualityExtension::Unpack(rhs);
+    return Unpack(lhs) == Unpack(rhs);
   }
 
   friend bool operator!=(const T& lhs, const T& rhs) {
@@ -188,13 +187,13 @@ struct SerializeExtension : Extension&lt;SerializeExtension, T&gt; {
   friend void Serialize(Serializer& s, const T& value) {
     std::apply([&] auto&... fields) {
       (s.Serialize(fields), ...);
-    }, SerializeExtension::Unpack(*this));
+    }, Unpack(*this));
   }
 
   friend bool Deserialize(Deserializer& d, T& value) {
     return std::apply([&] (auto&... fields) {
       return (d.Deserialize(fields) && ...);
-    }, SerializeExtension::Unpack(*this));
+    }, Unpack(*this));
   }
 
 };
@@ -211,7 +210,6 @@ struct ExtensionSet;
 template &lt;typename T, int FieldCount, typename... Extensions&gt;
 struct ExtensionSet &lt;T, FieldCount, TypeList&lt;Extensions...&gt;&gt;
   : Extensions... {
-
 
 
 
@@ -232,8 +230,7 @@ struct ExtensionSet &lt;T, FieldCount, TypeList&lt;Extensions...&gt;&gt;
   : Extensions... {
  private:
   auto UnpackThis() const & {
-    return EnableExtensions::Unpack&lt;FieldCount&gt;(
-        static_cast&lt;const T&&gt;(*this));
+    return UnpackFields&lt;FieldCount&gt;(static_cast&lt;const T&&gt;(*this));
   }
 };
 </code></pre>
@@ -244,11 +241,11 @@ struct ExtensionSet &lt;T, FieldCount, TypeList&lt;Extensions...&gt;&gt;
 
 ```cc[]
 template <int FieldCount, typename T>
-constexpr static auto Unpack(T&& t) {
+constexpr static auto UnpackFields(T&& t) {
   if constexpr (FieldCount == -1) {
     constexpr int kNumFields = NumFields<std::decay_t<T>>();
     if constexpr (kNumFields != -1) {
-      return Unpack<kNumFields>(std::forward<T>(t));
+      return UnpackFields<kNumFields>(std::forward<T>(t));
     } else {
       return Error{};
     }
