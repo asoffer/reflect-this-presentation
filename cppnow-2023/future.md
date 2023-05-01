@@ -26,6 +26,11 @@ class StrongType : Extend<T, 1>::template With<Exts...> {
 };
 ```
 
+NOTES:
+
+* Something is simple as this would provide a really nice appoach.
+* Strong types are finnicky because sometimes all you want is comparison with equality.
+
 @@@
 
 ## Strong types
@@ -36,6 +41,10 @@ struct MyIdType : StrongType<MyIdType, int,
   using StrongType::StrongType;
 };
 ```
+
+NOTES:
+
+Like for a type representing an identifier.
 
 @@@
 
@@ -51,6 +60,18 @@ struct MyNumber : StrongType<MyNumber, int,
 
 NOTES:
 
-Might be worth saying something about why this approach over a macro or straight
-`using`. This allows the user to add their own member functions. It gives an
-easier off-ramp.
+* But sometimes you need to do arithmetic.
+* And there are many variations on this theme.
+* The important point is that the capabilities you want for a type are specifiable with the extensions we've built.
+* But I'm getting ahead of myself, because I'm jumping straight to the implementation without first discussing the important parts.
+
+@@@
+
+## How I think about design
+
+1. What problem are we solving, and why?
+1. What are our priorities?
+1. Evaluate the design space.
+1. Implement it!
+1. Iteratively improve upon our design.
+

@@ -3,12 +3,13 @@
 NOTES:
 
 * Follow along.
+* Questions during.
 * Slide numbers.
 
 @@@
 
-## <span style="color:#a00000;text-decoration:line-through"><span style="color:black">How I think about design.</span></span>
-### <span class="edited_title">Talk outline.</span>
+## <span style="color:#a00000;text-decoration:line-through"><span style="color:black">How I think about design</span></span>
+### <span class="edited_title">Talk outline</span>
 
 
 1. What problem are we solving, and why?

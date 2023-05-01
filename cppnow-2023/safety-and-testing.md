@@ -61,6 +61,11 @@ struct EqualityExtension : Extension {
 ```
 <!-- .element style="font-size:12pt;" -->
 
+NOTES:
+Extensions can specify the expressions that need to be valid for the thing to work.
+
+This is a lot like concept constraints, but we can't actually constrain `T` because `T` is incomplete at the time we're instantiating the extension.
+
 @@@
 
 ## Safety and Testing
@@ -80,4 +85,6 @@ struct ExtensionSet {
 
 NOTES:
 
-Credit: Daisy Hollman.
+`ExtensionSet`s constructor simply invokes each of these functions.
+
+Credit here goes to Daisy Hollman for this idea.

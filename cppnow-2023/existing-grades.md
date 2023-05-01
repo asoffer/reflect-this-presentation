@@ -53,7 +53,7 @@ std::ostream& operator<<(std::ostream& os, const Person& p) {
 
 NOTES:
 
-* Evolution -- Requires lots of changes. Adding a field is error prone.
+* Evolution -- Requires lots of changes.
 * Understandability -- By definition, nothing tricky going on here.
 * Safety & testing -- Easy to forget to add fields or order them incorrectly.
 @@@

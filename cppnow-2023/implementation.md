@@ -113,7 +113,15 @@ struct Extend final {
 <pre data-id="eq-animation"><code data-trim data-line-numbers>
 template &lt;typename T&gt;
 struct EqualityExtension : Extension&lt;EqualityExtension, T&gt; {
+
+
     // Implement me.
+
+
+
+
+
+
 };
 </code></pre>
 
@@ -167,10 +175,14 @@ struct SerializeExtension : Extension&lt;SerializeExtension, T&gt; {
 
   friend void Serialize(Serializer& s, const T& value) {
     // Implement me.
+
+
   }
 
   friend bool Deserialize(Deserializer& d, T& value) {
     // Implement me.
+
+
   }
 
 };

@@ -1,8 +1,4 @@
-## Awesome features we added
-
-@@@
-
-## <span style="color:#a00000;text-decoration:line-through"><span style="color:black">Awesome features we added</span></span>
+## <span style="color:#a00000;text-decoration:line-through"><span style="color:black">Awesome features</span></span>
 ### <span class="edited_title">Iterative improvements fueled by user feedback</span>
 
 <div>
@@ -29,3 +25,23 @@
 
 </div>
 </div>
+
+NOTES:
+
+What I've shown here is mostly our first attempt, but there were a bunch of things that didn't quite work out as well as we wanted.
+
+---
+
+Some types compiled fine in C++17 but failed with C++20
+
+---
+
+We found instances where types would compile when they requested equality, even though their type had no viable equality operator.
+
+---
+
+There were common situations that produced really bad error messages.
+
+---
+
+And the most requested feature of all: Could we make the printing extension automatically include field names?
