@@ -3,13 +3,18 @@
 > "Can you make &nbsp;`Extend`&nbsp; print its field names?"
 <!-- .element class="blockquote2" -->
 
+NOTES:
+
+* Because the existing TUPLE_DEFINE_STRUCT library is a macro that wraps the struct fields, it has access to the field names when printing.
+* The `PrintingExtension` doesn't have that luxury.
+
 @@@
 
 ## Development Speed
 
 ```cc[]
 template <typename T>
-struct PrintingExtension {
+struct PrintingExtension : Extension<PrintingExtension, T> {
   friend std::ostream& operator<<(std::ostream& os, const T& value) {
     std::string_view separator = "{ ";
 
@@ -25,14 +30,26 @@ struct PrintingExtension {
 
 NOTES:
 
-* Our original implementation looked like this, but it was definitely lacking.
-With TUPLE_DEFINE_STRUCT, people had access to the field names.
-
-* Had some ideas, but they needed compiler hooks, and Clang's hooks were not
-  sufficiently robust that we were comfortably relying on them.
+* This was our original implementation. It would print the fields as a comma-separated list.
 
 * Aside: `std::exchange` trick. First application writes the open brace. After
   that `separator` is repeatedly overwritten with the comma.
+
+* So this is where we were. Then we found out about ...
+
+@@@
+
+## Development Speed
+
+`__builtin_dump_struct`
+
+NOTES:
+
+* ...Clang's `__builtin_dump_struct`, and we got really excited. This is a compiler intrinsic used primarily for debugging.
+* it works by repeatedly invoking a user-provided printf-like function.
+* And I'm more than happy to write something that looks like printf, but actually just stashes information passed to it.
+* The problem was, it wasn't terribly robust. If you tried to do anything remotely interesting, the compiler would crash.
+* But then...
 
 @@@
 
@@ -50,14 +67,12 @@ With TUPLE_DEFINE_STRUCT, people had access to the field names.
 
 NOTES:
 
-* `__builtin_dump_struct` was something we considered using but in was not very robust.
-* It gives a debug representation of the fields in a struct by repeatedly calling a user-provided printf-like function.
-* It has access to to the field names at compile-time!
+* ...`__builtin_dump_struct` improved significantly, to the point where we were comfortable relying on it.
 
 ---
 
-* I love these comments so much. Yes you can use this for reflection. Yes, you
-  do need to parse the input.
+* When I took this screeshsot, this was the top voted comment, and I love it so much. READ COMMENTS
+* This is almost exactly what we're going to do.
 
 @@@
 
@@ -65,7 +80,7 @@ NOTES:
 
 ```cc[4,10-14]
 template <typename T>
-struct PrintingExtension {
+struct PrintingExtension : Extension<PrintingExtension, T> {
   friend std::ostream& operator<<(std::ostream& os, const T& value) {
     static const auto field_name_info = GetFieldNameInfo(value);
 
@@ -75,7 +90,7 @@ struct PrintingExtension {
       std::apply([&](auto&... fields) {
         size_t i = 0;
         ((os << std::exchange(separator, ", ") 
-             << field_name_info[i++] << " = "
+             << field_name_info.field_names[i++] << " = "
              << fields),
          ...);
       }, Unpack(value));
@@ -91,19 +106,21 @@ struct PrintingExtension {
 
 NOTES:
 
-* Why not constexpr? We need a value to be passed and we don't have a good way to produce one otherwise. Default construction is maybe reasonable, but we don't want this extension to require constexpr default constructibility.
+* This is how we modified the printing extension. We call `GetFieldnameInfo` to extract the field names and then iterate through them in the fold expression.
+* It's worth noting that we're not doing this at compile-time. It's a function-local static.
+* The reason for this is that we do not know if the type is default constructible. We need to pass a pointer to a valid object to `__builtin_dump_struct`, but we don't know how we could construct one. So we wait until the first time this is called with an actual value and use that. We don't actually care what the value is, we just need someone else to construct one for us.
 
 @@@
 
 ## Development Speed
 
-```cc[|6]
+```cc[]
 template <typename T>
 auto GetFieldNameInfo(const T& value) {
-  std::array<std::string_view, kFieldCount> field_names;
+  std::array<std::string_view, FieldCount<T>> field_names;
   ParsingState state;
   __builtin_dump_struct(std::addressof(value),
-                        PrintfHijack
+                        FieldNameExtractingPrintf
                         state,
                         field_names);
   return FieldNameInfo{
@@ -115,16 +132,18 @@ auto GetFieldNameInfo(const T& value) {
 
 NOTES:
 
-* Pass our version of printf in which updates parsing state and fills in field names.
+* This is what `GetFieldNameInfo` looks like. We create an array that is going to hold the field names and a `ParsingState` object. And then we call `__bultin_dump_struct` passing it `FieldNameExtractingPrintf`
+* `__builtin_dump_struct` will repeatedly call `FieldNameExtractingPrintf` with these parameters followed by a format string and arguments to pass to the format string.
 
 @@@
 
 ## Development Speed
 
 ```cc[]
-int PrintfHijack(ParsingState& state,
-                 std::span<std::string_view> fields,
-                 const char *format, ...) {
+int FieldNameExtractingPrintf(
+    ParsingState& state,
+    std::span<std::string_view> fields,
+    const char *format, ...) {
   std::va_list va;
   va_start(va, format);
   ...
@@ -135,4 +154,7 @@ int PrintfHijack(ParsingState& state,
 
 NOTES:
 
-I'm leaving a lot out here, because it's not worth diving into the precise details of how `__builtin_dump_struct` works, but I hope this is enough to whet your appetite for the approach.
+* I'm leaving a lot off this slide, but I hope this gives you the gist of whats happening.
+* Each time our function gets called with a field name we update the index corresponding to the field we are processing, and stash its field name in `fields`.
+* In reality there's a lot more going on. Because `__builtin_dump_struct` recurses into all sub-structs, but we only want to consider the top level field names, we need to track our depth in that instantiation as well.
+* But I hope this whets your appetite for the approach.

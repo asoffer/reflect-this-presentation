@@ -1,5 +1,9 @@
-## <span style="color:#a00000;text-decoration:line-through"><span style="color:black">Awesome features</span></span>
-### <span class="edited_title">Iterative improvements fueled by user feedback</span>
+## We're done!
+
+@@@
+
+## We're <span style="color:#a00000;text-decoration:line-through"><span style="color:black">done</span></span>!
+### <span class="edited_title">ready to get user feedback</span>
 
 <div>
 <div style="width:50%; float:left">
@@ -36,11 +40,11 @@ Some types compiled fine in C++17 but failed with C++20
 
 ---
 
-We found instances where types would compile when they requested equality, even though their type had no viable equality operator.
+There were common situations that produced really bad error messages.
 
 ---
 
-There were common situations that produced really bad error messages.
+We found instances where types would compile when they requested equality, even though their type had no viable equality operator.
 
 ---
 

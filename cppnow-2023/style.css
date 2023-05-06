@@ -92,6 +92,12 @@ img.bordered {
   border-radius:0.2em;
 }
 
+.grade {
+  font-family: delicious;
+  padding-left: 1em;
+  color: #a00000;
+}
+
 .edited_title {
   color:#a00000;
   font-family: delicious;

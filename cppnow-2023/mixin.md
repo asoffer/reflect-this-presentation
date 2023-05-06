@@ -2,7 +2,9 @@
 
 NOTES:
 
-I know of 4
+* Okay, so we know what problem we're solving and what our priorities are. Now we get to start exploring the design space.
+* What techniques can we leverage?
+* I by no means have an exhaustive list here, but I can think of 4.
 
 @@@
 
@@ -14,11 +16,6 @@ I know of 4
 * Mixins
 <li style="visibility:hidden;">Language reflection support</li>
 
-NOTES:
-
-* Now we understand the what and why. We need a plan of attack.
-* Scope is too broad.
-
 @@@
 
 ## What techniques can we leverage?
@@ -30,9 +27,9 @@ NOTES:
 <li style="visibility:hidden;">Language reflection support</li>
 
 NOTES:
-I'm going to rule out code generation immediately. Code generators are hostile to refactoring at scale.
+I'm going to rule out code generation immediately. Code generators are hostile to refactoring at scale, which is the primary tool I have for evolution. Because I care about evolution I have to throw this away as a possibility.
 
-Solve the problem for code writers, but not for code readers.
+Beyond that, code generators solve the problem for code writers, but not readers. Either the generated code gets checked in, in which case you haven't helped readers at all, or the generated code is never checked in which case you have an understandability problem.
 
 @@@
 
@@ -45,7 +42,7 @@ Solve the problem for code writers, but not for code readers.
 <li style="visibility:hidden;">Language reflection support</li>
 
 NOTES:
-Macros are a form of code generator.
+Next, Macros are a just a form of code generator.
 
 @@@
 
@@ -57,6 +54,14 @@ Macros are a form of code generator.
 * Mixins
 <li style="visibility:hidden;">Language reflection support</li>
 
+NOTES:
+
+I'm still waiting on my acceptance letter to Hogwarts, so at lesat for the time being, actual magic isn't an option.
+
+So that leaves us with just "mixins."
+
+Well, that's a slight lie.
+
 @@@
 
 ## What techniques can we leverage?
@@ -67,6 +72,10 @@ Macros are a form of code generator.
 * Mixins
 * Language reflection support
 
+NOTES:
+
+There's one more tool I know of which is having honest-to-goodness language-level reflection support.
+
 @@@
 
 ## What techniques can we leverage?
@@ -76,6 +85,12 @@ Macros are a form of code generator.
 * <span class="crossed_out"><span class="wrong_content">Actual magic</span></span>
 * Mixins
 * <span class="crossed_out"><span class="wrong_content">Language reflection support</span></span>
+
+NOTES:
+
+I hope we get that in C++26, but for today, wer'e stuck in this world.
+
+Okay, so if we're going to be using mixins, we should understand what they are and what they look like, both in C++ and in other languages.
 
 @@@
 
@@ -91,6 +106,14 @@ class Person(Eq):
     self.name = ""
     self.email = ""
 ```
+
+NOTES:
+
+So here's an example of a mixin in Python
+
+Here we have a `Person` class, and an "equality" mixin. It's implemented as a base class, and you can see that it implements equality by comparing the underlying dictionaries.
+
+Python being as dynamic as it is, the dictionary has access to the derived `Person` class, so there will be entries in the dictionary for "name" and "email."
 
 @@@
 

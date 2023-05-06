@@ -19,6 +19,3 @@ We still don't know a way to support both of these.
 
 This is where evolution is critical. We had users that had references in their structs. We were able to "just add the field count."
 Not ideal, but the best we could do. And certainly better than having to leave the framework entirely.
-
-* Having someone personally thank me for writing a `static_assert` is an item I
-  did not know was on my bucket list.

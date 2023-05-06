@@ -114,6 +114,128 @@ NOTES:
 
 @@@
 
+<!-- .element data-auto-animate -->
+## Extensions
+
+<pre data-id="eq-animation" style="font-size:14pt;"><code data-trim data-line-numbers>
+template &lt;typename T&gt;
+struct EqualityExtension : Extension&lt;EqualityExtension, T&gt; {
+
+
+    // Implement me.
+
+
+
+
+
+
+};
+</code></pre>
+
+@@@
+<!-- .element data-auto-animate -->
+
+## Extensions
+
+<pre data-id="eq-animation" style="font-size:14pt;"><code data-trim data-line-numbers>
+template &lt;typename T&gt;
+struct EqualityExtension : Extension&lt;EqualityExtension, T&gt; {
+
+  friend bool operator==(const T& lhs, const T& rhs) {
+    // Implement me.
+  }
+
+  friend bool operator!=(const T& lhs, const T& rhs) {
+    return !(lhs == rhs);
+  }
+
+};
+</code></pre>
+
+@@@
+<!-- .element data-auto-animate -->
+
+## Extensions
+
+<pre data-id="eq-animation" style="font-size:14pt;"><code data-trim data-line-numbers>
+template &lt;typename T&gt;
+struct EqualityExtension : Extension&lt;EqualityExtension, T&gt; {
+
+  friend bool operator==(const T& lhs, const T& rhs) {
+    return Unpack(lhs) == Unpack(rhs);
+  }
+
+  friend bool operator!=(const T& lhs, const T& rhs) {
+    return !(lhs == rhs);
+  }
+
+};
+</code></pre>
+
+@@@
+<!-- .element data-auto-animate -->
+## Extensions
+
+<pre data-id="serial-animation" style="font-size:14pt;"><code data-trim data-line-numbers>
+template &lt;typename T&gt;
+struct SerializeExtension : Extension&lt;SerializeExtension, T&gt; {
+
+  friend void Serialize(Serializer& s, const T& value) {
+    // Implement me.
+
+
+  }
+
+  friend bool Deserialize(Deserializer& d, T& value) {
+    // Implement me.
+
+
+  }
+
+};
+</code></pre>
+
+@@@
+<!-- .element data-auto-animate -->
+## Extensions
+
+<pre data-id="serial-animation" style="font-size:14pt;"><code data-trim data-line-numbers>
+template &lt;typename T&gt;
+struct SerializeExtension : Extension&lt;SerializeExtension, T&gt; {
+
+  friend void Serialize(Serializer& s, const T& value) {
+    std::apply([&] (auto&... fields) {
+      (s.Serialize(fields), ...);
+    }, Unpack(*this));
+  }
+
+  friend bool Deserialize(Deserializer& d, T& value) {
+    return std::apply([&] (auto&... fields) {
+      return (d.Deserialize(fields) && ...);
+    }, Unpack(*this));
+  }
+
+};
+</code></pre>
+
+@@@
+
+## Extensions
+
+```cc[]
+template <typename T>
+struct OrderingExtension : Extension<OrderingExtension, T> {
+  using deps = TypeList<EqualityExtension<T>>;
+
+  friend bool operator<(const T& lhs, const T& rhs) {
+    return Unpack(lhs) < Unpack(rhs);
+  }
+  // ...
+};
+```
+
+@@@
+
 ## And many more
 
 |                                            |               |
@@ -121,5 +243,7 @@ NOTES:
 | [Better C++14 Reflections](https://youtu.be/UlNUNxLtBI0) | Antony Polukhin |
 | [Building a C++ Reflection System in<br />One Weekend Using Clang and LLVM](https://youtu.be/XoYVeduK4yI) | Arvid Gerstmann |
 | [C++ Mixins](https://youtu.be/VMOsz61Hg84) | Odin Holmes   |
+| [Cute C++ Tricks: Part 2 of N](https://youtu.be/EwEppzQe5Oc) | Daisy Hollman |
+| [MFC - the M's for Mixin](https://youtu.be/fC0-Hb5HGBo) | Tobias Loew |
 | [Practical (?) Applications of Reflection](https://youtu.be/JrOJ012XxNg) | Jackie Kay |
 <!-- .element style="font-size:24pt;" -->

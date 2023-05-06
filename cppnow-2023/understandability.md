@@ -11,7 +11,7 @@ The most common problems we saw were that people forgot the `friend EnableExtens
 
 ## Understandability
 
-```txt[|2-3|6-12|14]
+```txt[|2-4|6-12|14]
 extend.h:xx:yy: error: static assertion failed due to requirement
 'kFailedToCountFields': Could not detect the number of fields. If you're using a
 class with private fields, you must specify the number of fields as a second
@@ -31,4 +31,7 @@ See ABSEIL_TIP#extending-classes for a worked example.
 
 NOTES:
 
-Not every solution needs to be hi-tech.
+* Not every solution needs to be hi-tech.
+
+* Having someone personally thank me for writing a `static_assert` is an item I
+  did not know was on my bucket list.

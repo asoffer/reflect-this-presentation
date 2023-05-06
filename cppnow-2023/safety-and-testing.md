@@ -1,7 +1,7 @@
 ## Safety and Testing
 
 ```cc[|11]
-class SafeString : public Extend<SafeString, 2>::With<EqualityExtesnion> {
+class SafeString : public Extend<SafeString, 2>::With<EqualityExtension> {
    explicit SafeString(std::string s) : s_(std::move(S)) {}
 
    std::string copy() const;

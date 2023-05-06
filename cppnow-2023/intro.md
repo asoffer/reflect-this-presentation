@@ -5,6 +5,7 @@ NOTES:
 * Follow along.
 * Questions during.
 * Slide numbers.
+* If you're looking to find after the talk, I don't really have a social media presence, so you're going to have to find me in person.
 
 @@@
 
@@ -29,7 +30,9 @@ NOTES:
 
 @@@
 
-## A small army
+## "I did it all myself!"
+### <span class="edited_title">...said no one ever.</span>
+
 
 <div>
 <div style="width:50%; float:left">
@@ -59,8 +62,10 @@ NOTES:
 
 NOTES:
 
-* Just the people who have contributed meaningfully to the design.
-* Many others have offered improvements and bug fixes.
+* I'd be remiss if you came away from the talk thinking this work was just mine. That couldn't be further from the truth.
+* In reality this work is the culmination of tons of discussions and design and implementation work from many engineers.
+* These are the people who have really contributed in a way that fundamentally changed the direction of the library we're going to talk about.
+* There are many others who have contributed via bug fixes or implementation improvements.
 
-* Zie Weaver in particular has done a huge amount here and is responsible for the migration of an existing library to this one.
-* If you didn't catch her talk yesterday, you can watch it online.
+* I want to call out Zie Weaver in particular. She has done a huge amount here and is responsible for the migration of an existing library to this one.
+* She's speaking immediately after this about the migration. If you're interested in learning about what I believe is the most complex large scale refactoring effort ever attempted in C++, I'd encourage you to attend her talk.

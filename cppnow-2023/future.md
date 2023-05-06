@@ -3,8 +3,8 @@
 * Improved testing facilities.
 * C++23, Deducing `this`.
 * Portable access to field names?
-* Basis for a strong types library.
 * Improved field-counting.
+* Basis for a strong types library.
 
 @@@
 
@@ -16,7 +16,7 @@ template <typename T,
           template <typename> typename... Exts>
 class StrongType : Extend<T, 1>::template With<Exts...> {
  public:
-  explicit StrongType(T value) : value_(std::move(value)) {}
+  explicit StrongType(T v) : value_(std::move(v)) {}
 
   const T& value() const { return value_; }
 
