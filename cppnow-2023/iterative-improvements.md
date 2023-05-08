@@ -2,7 +2,7 @@
 
 @@@
 
-## We're <span style="color:#a00000;text-decoration:line-through"><span style="color:black">done</span></span>!
+## We're <span style="color:#a00000;text-decoration:line-through"><span class="wrong_content">done</span></span>!
 ### <span class="edited_title">ready to get user feedback</span>
 
 <div>

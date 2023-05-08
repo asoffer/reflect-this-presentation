@@ -1,15 +1,49 @@
-[https://github.com/asoffer/reflect-this-presentation](https://github.com/asoffer/reflect-this-presentation)
+## Follow along!
+
+[https://asoffer.github.io/reflect-this-presentation/cppnow-2023](https://asoffer.github.io/reflect-this-presentation/cppnow-2023)
+
+
+<span class="edited">(link available on the conference schedule)</span>
 
 NOTES:
 
 * Follow along.
-* Questions during.
 * Slide numbers.
-* If you're looking to find after the talk, I don't really have a social media presence, so you're going to have to find me in person.
+* If you're looking to find me after the talk, I don't really have a social media presence, so you're going to have to find me in person.
+
+PAUSE
+
+* I submitted the title for this talk before I knew exactly how I wanted to format it. The title is accurate, but it also could have been...
 
 @@@
 
-## <span style="color:#a00000;text-decoration:line-through"><span style="color:black">How I think about design</span></span>
+## How to design dinosaurs
+### <span class="edited_title" style="margin-top:-0.25em; padding-left:0.65em;">^</span>
+### <span class="edited_title" style="padding-left:0.4em;">not</span>
+
+<img src="img/could-should.jpeg" class="bordered fragment" data-frament-index="1" />
+
+NOTES:
+
+... "How not to design dinosaurs."
+
+This is a reference to Jurassic Park.
+
+If you haven't seen Jurassic Park, I apologize; the memes throughout this talk are probably not going to be meaningful to you.
+
+---
+
+But there's a famous line in which Jeff Goldblum's character says "your scientists were so preoccupied answering whether they could, they didn't stop to think if they should."
+
+And I think this is somewhat common with design. We all get excited about how we're going to use or abuse some cool new feature, and we lose sight of whether the thing we built is addressing the problem we set out to solve in the first place. So when I refer to dinosaurs metaphorically, I'm talking about libraries that are clever and interesting science experiments, but ultimately might do more harm to users than the value they provide.
+
+I want to be clear that I fully endorse trying new things. Designing dinosaurs is okay. This sort of experimentation really pushes the state of the art forward. But it's important that we don't conflate this sort of experimentation with a more user-centric design focus. We don't want to accidentally let dinosaurs out into the wild.
+
+So this talk is about that other kind of design. It's about designing something when you specifically aim to not make a dinosaur. We're going to walk through the design process of a mixin library we built. We are going to dive into the implementation, but we're going to spend a significant amount of time thinking about the higher-level design.
+
+@@@
+
+## <span style="color:#a00000;text-decoration:line-through"><span class="wrong_content">How I think about design</span></span>
 ### <span class="edited_title">Talk outline</span>
 
 

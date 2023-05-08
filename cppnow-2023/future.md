@@ -67,7 +67,9 @@ NOTES:
 
 @@@
 
-## How I think about design
+## <span style="color:#a00000;text-decoration:line-through"><span class="wrong_content">Strong types</span></span>
+### <span class="edited_title">We're getting ahead of ourselves</span>
+
 
 1. What problem are we solving, and why?
 1. What are our priorities?

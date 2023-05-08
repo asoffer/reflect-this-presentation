@@ -41,7 +41,19 @@ NOTES:
 
 ## Development Speed
 
-`__builtin_dump_struct`
+
+<div style="column-count: 2">
+
+```cc[]
+__builtin_dump_struct(&some_struct,
+                      some_printf_func,
+                      args...);
+```
+<!-- .element style="margin-top:7em; width:100%;" -->
+
+<img src="img/clever.webp" class="bordered" style="width:80%" />
+
+</div>
 
 NOTES:
 

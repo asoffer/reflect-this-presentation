@@ -115,6 +115,8 @@ Here we have a `Person` class, and an "equality" mixin. It's implemented as a ba
 
 Python being as dynamic as it is, the dictionary has access to the derived `Person` class, so there will be entries in the dictionary for "name" and "email."
 
+The important point here is that the functionality of "equality" can be mixed in to `Person` with inheritance.
+
 @@@
 
 ## <span style="vertical-align:top;">Mixins in</span> ![Javascript](img/javascript.png) <!-- .element style="height:64px; position:relative; top:-0.3em;" -->
@@ -142,6 +144,12 @@ Object.assign(Person.prototype, toStringMixin);
 ```
 <!-- .element: style="font-size:12pt; width:57%;" -->
 
+NOTES:
+
+Here's a mixin in javascript. And it's largely similar. Javascript has a slightly different inheritance model, but it's very similar. The mixin is going to iterate through the members of the type generically and it gets associated with the type on line 19.
+
+This is a C++ conference, so we have to talk about mixins ...
+
 @@@ <!-- element: data-auto-animate -->
 
 ## <span style="vertical-align:top;">Mixins in</span> ![Rust](img/rust.svg) <!-- .element style="height:64px; position:relative; top:-0.1em;" -->
@@ -154,6 +162,12 @@ struct Person {
 }
 ```
 <!-- .element: style="width:30%;" -->
+
+NOTES:
+
+... in Rust.
+
+Rust takes a very different approach. This particular `derive(Eq)` macro happens to be built in to the compiler, but you can write your own such `derive` macros. If you were to write your own, you would get access to a `TokenStream` consisting of the tokens in the struct.
 
 @@@
 

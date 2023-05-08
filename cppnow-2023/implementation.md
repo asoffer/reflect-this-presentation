@@ -1,3 +1,17 @@
+## Implementation
+
+<img src="img/butts.gif" class="bordered" />
+
+NOTES:
+
+Okay, we're going to switch gears now.
+
+I promised we're going to talk about the implementation, and that's what we're going to do.
+
+So if I've been boring you with high-level design bits, you can wake up now, because we're going to speed through this.
+
+@@@
+
 ## Implementation: Overview
 
 ```cc[]
@@ -8,15 +22,12 @@ struct Extend final {
       T, FieldCount, Dependencies<Extensions<T>...>> {};
 };
 ```
-<!-- .element data-id="code-animation" class="fragment" data-fragment-id="1" -->
 
 NOTES:
 
-It's not really important from the design perspective, but when we later talk about iterative improvements, it's important that we have some understanding.
+First define the structure that lets us write `Extend<T>::With`
 
 ---
-
-First define the structure that lets us write `Extend<T>::With`
 
 Three interesting things on this slide:
 * FieldCount -- `-1` specifies that we will try to deduce the count.
@@ -44,12 +55,22 @@ Extend from all simultaneously rather than a hierarchy.
 
 ## Implementation: Dependencies
 
+<img src="img/barbasol.webp" class="bordered" />
+
+@@@
+
+## Implementation: Dependencies
+
 ```cc[]
 template <typename... Ts>
 using Dependencies = decltype(internal::FindAllDependencies(
     /*unprocessed=*/TypeList<Ts...>{},
     /*  processed=*/TypeList<>{}));
 ```
+
+NOTES:
+
+FindAllDependencies is, in my opinion the important secret sauce that makes `Extend` what it is.
 
 @@@
 
