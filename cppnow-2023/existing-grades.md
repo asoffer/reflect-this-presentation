@@ -47,9 +47,9 @@ std::ostream& operator<<(std::ostream& os, const Person& p) {
 | Goal              | Grade |
 | ----------------- | ----- |
 | Evolution         | <span class="fragment grade" data-fragment-index="1">B+</span> |
-| Understandability | <span class="fragment grade" data-fragment-index="1">A+</span> |
-| Safety & Testing  | <span class="fragment grade" data-fragment-index="1">D </span> |
-| Dev. Speed        | <span class="fragment grade" data-fragment-index="1">C-</span> |
+| Understandability | <span class="fragment grade" data-fragment-index="2">A+</span> |
+| Safety & Testing  | <span class="fragment grade" data-fragment-index="3">D </span> |
+| Dev. Speed        | <span class="fragment grade" data-fragment-index="4">C-</span> |
 
 NOTES:
 
@@ -77,9 +77,9 @@ BOOST_PFR_FUNCTIONS_FOR(Person)
 | Goal              | Grade |
 | ----------------- | ------ |
 | Evolution         | <span class="fragment grade" data-fragment-index="1">C </span> |
-| Understandability | <span class="fragment grade" data-fragment-index="1">A-</span> |
-| Safety & Testing  | <span class="fragment grade" data-fragment-index="1">A+</span> |
-| Dev. Speed        | <span class="fragment grade" data-fragment-index="1">A+</span> |
+| Understandability | <span class="fragment grade" data-fragment-index="2">A-</span> |
+| Safety & Testing  | <span class="fragment grade" data-fragment-index="3">A+</span> |
+| Dev. Speed        | <span class="fragment grade" data-fragment-index="4">A+</span> |
 </div>
 
 NOTES:
@@ -113,9 +113,9 @@ struct Person {
 | Goal              | Grade  |
 | ----------------- | ------ |
 | Evolution         | <span class="fragment grade" data-fragment-index="1">B-</span> |
-| Understandability | <span class="fragment grade" data-fragment-index="1">C-</span> |
-| Safety & Testing  | <span class="fragment grade" data-fragment-index="1">A+</span> |
-| Dev. Speed        | <span class="fragment grade" data-fragment-index="1">B </span> |
+| Understandability | <span class="fragment grade" data-fragment-index="2">C-</span> |
+| Safety & Testing  | <span class="fragment grade" data-fragment-index="3">A+</span> |
+| Dev. Speed        | <span class="fragment grade" data-fragment-index="4">B </span> |
 
 </div>
 
@@ -146,9 +146,9 @@ struct Person
 | Goal              | Grade  |
 | ----------------- | ------ |
 | Evolution         | <span class="fragment grade" data-fragment-index="1">A </span> |
-| Understandability | <span class="fragment grade" data-fragment-index="1">A-</span> |
-| Safety & Testing  | <span class="fragment grade" data-fragment-index="1">A+</span> |
-| Dev. Speed        | <span class="fragment grade" data-fragment-index="1">A </span> |
+| Understandability | <span class="fragment grade" data-fragment-index="2">A-</span> |
+| Safety & Testing  | <span class="fragment grade" data-fragment-index="3">A+</span> |
+| Dev. Speed        | <span class="fragment grade" data-fragment-index="4">A </span> |
 
 </div>
 
