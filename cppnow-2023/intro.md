@@ -8,8 +8,6 @@
 NOTES:
 
 * Follow along.
-* Slide numbers.
-* If you're looking to find me after the talk, I don't really have a social media presence, so you're going to have to find me in person.
 
 PAUSE
 
@@ -29,17 +27,31 @@ NOTES:
 
 This is a reference to Jurassic Park.
 
-If you haven't seen Jurassic Park, I apologize; the memes throughout this talk are probably not going to be meaningful to you.
+If you haven't seen Jurassic Park, I apologize; the memes sprinkled throughout this talk are probably not going to be meaningful to you.
+
+But there's a famous line in which Jeff Goldblum's character says...
 
 ---
 
-But there's a famous line in which Jeff Goldblum's character says "your scientists were so preoccupied answering whether they could, they didn't stop to think if they should."
+... "your scientists were so preoccupied with whether or not they could, they didn't stop to think if they should."
 
-And I think this is somewhat common with design. We all get excited about how we're going to use or abuse some cool new feature, and we lose sight of whether the thing we built is addressing the problem we set out to solve in the first place. So when I refer to dinosaurs metaphorically, I'm talking about libraries that are clever and interesting science experiments, but ultimately might do more harm to users than the value they provide.
+I don't know about you, but this is a pattern I fall into. I get excited by some new language feature and I think "what can I use this for?" when I should really be thinking about the problem I'm trying to solve, rather than the solution I'm trying to apply.
 
-I want to be clear that I fully endorse trying new things. Designing dinosaurs is okay. This sort of experimentation really pushes the state of the art forward. But it's important that we don't conflate this sort of experimentation with a more user-centric design focus. We don't want to accidentally let dinosaurs out into the wild.
+So when I refer to dinosaurs, I'm talking about libraries that are clever and interesting science experiments...
 
-So this talk is about that other kind of design. It's about designing something when you specifically aim to not make a dinosaur. We're going to walk through the design process of a mixin library we built. We are going to dive into the implementation, but we're going to spend a significant amount of time thinking about the higher-level design.
+@@@
+
+## How to design dinosaurs
+### <span class="edited_title" style="margin-top:-0.25em; padding-left:0.65em;">^</span>
+### <span class="edited_title" style="padding-left:0.4em;">not</span>
+
+<img src="img/gate.png" class="bordered" />
+
+NOTES:
+
+...but ultimately might end up being difficult or dangerous to use properly.
+
+So this talk is two things. It's a talk about a mixin library we've designed, but I want to use that library as a case study, to go through a process that helps me make sure I'm not designing a dinosaur.
 
 @@@
 
@@ -58,7 +70,7 @@ NOTES:
 * Talk structured in the same way I think about design.
 * Problem: If you can't articulate what the problem is *and* why it's a problem, you'll never convince anyone it's worth solving. -- If you're familiar with mixins, you already understand this, but bear with me.
 * Priorities: Important to state explicitly. Tradeoffs.
-* Evaluate: Because tradeoffs, you'll want to explore several different directions. This is where you start to make some design decisions.
+* Evaluate: Explore what others have done, both in C++ and other languages. Start to make some decisions.
 * Implement: Only once you understand the problem space.
 * Iterate: You'll get it wrong the first try.
 

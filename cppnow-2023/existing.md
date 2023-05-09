@@ -222,7 +222,7 @@ struct SerializeExtension : Extension&lt;SerializeExtension, T&gt; {
 
 ## Extensions
 
-```cc[]
+```cc[3]
 template <typename T>
 struct OrderingExtension : Extension<OrderingExtension, T> {
   using deps = TypeList<EqualityExtension<T>>;

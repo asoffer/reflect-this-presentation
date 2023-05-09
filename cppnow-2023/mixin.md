@@ -56,7 +56,7 @@ Next, Macros are a just a form of code generator.
 
 NOTES:
 
-I'm still waiting on my acceptance letter to Hogwarts, so at lesat for the time being, actual magic isn't an option.
+I'm still waiting on my acceptance letter to Hogwarts, so at least for the time being, actual magic isn't an option.
 
 So that leaves us with just "mixins."
 
@@ -96,7 +96,7 @@ Okay, so if we're going to be using mixins, we should understand what they are a
 
 ## <span style="vertical-align:top;">Mixins in</span> ![Python](img/python.svg) <!-- .element style="height:64px; position:relative; top:-0.1em;" -->
 
-```py[]
+```py[|5|3]
 class Eq:
   def __eq__(self, other):
     return self.__dict__ == other.__dict__
@@ -111,17 +111,25 @@ NOTES:
 
 So here's an example of a mixin in Python
 
-Here we have a `Person` class, and an "equality" mixin. It's implemented as a base class, and you can see that it implements equality by comparing the underlying dictionaries.
+Here we have a `Person` class, and an "equality" mixin.
+
+---
+
+It's implemented as a base class,
+
+---
+
+and you can see that it implements equality by comparing the underlying dictionaries of the objects
 
 Python being as dynamic as it is, the dictionary has access to the derived `Person` class, so there will be entries in the dictionary for "name" and "email."
 
-The important point here is that the functionality of "equality" can be mixed in to `Person` with inheritance.
+The important point here is that the functionality of "equality" can be mixed in to `Person` with inheritance, and that that functionality is defined separately from the the `Person` class.
 
 @@@
 
 ## <span style="vertical-align:top;">Mixins in</span> ![Javascript](img/javascript.png) <!-- .element style="height:64px; position:relative; top:-0.3em;" -->
 
-```javascript[]
+```javascript[|4-7|19]
 let toStringMixin = {
   toString() {
     let s = "{\n";
@@ -146,7 +154,15 @@ Object.assign(Person.prototype, toStringMixin);
 
 NOTES:
 
-Here's a mixin in javascript. And it's largely similar. Javascript has a slightly different inheritance model, but it's very similar. The mixin is going to iterate through the members of the type generically and it gets associated with the type on line 19.
+Here's a mixin in javascript. Javascript has a slightly different inheritance model than Python, but it's largely similar.
+
+---
+
+The mixin is going to iterate through the members of the type generically.
+
+---
+
+And it gets associated with the the `Person` class on line 19.
 
 This is a C++ conference, so we have to talk about mixins ...
 
@@ -186,5 +202,14 @@ struct Person {
 
 NOTES:
 
-Only really have language support.
-The goal is to fill in the gap until we can have actual language support.
+It's important to point out that C++ has mixins too, at least for `operator==`, spaceship, and a few others.
+
+The problem is they only really have builtin language support. I can't use this technique with any of my own functionality, like, say, a to-string mixin.
+
+That would require real language reflection support. Our goal is to fill in the gap until we can have actual language support.
+
+PAUSE
+
+Okay, so I want to explore a few mixin libraries in C++, because even within the language there's a large design space to explore.
+
+And one of those libraries is going to be the one we designed.

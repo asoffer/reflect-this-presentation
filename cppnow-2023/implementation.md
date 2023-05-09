@@ -57,6 +57,10 @@ Extend from all simultaneously rather than a hierarchy.
 
 <img src="img/barbasol.webp" class="bordered" />
 
+NOTES:
+
+Next, let's talk about `Dependencies`. In my opinion this is the secret sauce that makes `Extend` what it is.
+
 @@@
 
 ## Implementation: Dependencies
@@ -70,7 +74,9 @@ using Dependencies = decltype(internal::FindAllDependencies(
 
 NOTES:
 
-FindAllDependencies is, in my opinion the important secret sauce that makes `Extend` what it is.
+`Dependencies` is going to compute a type list by getting the return type of `FindAllDependencies`.
+
+`FindAllDependencies` is a compile time breadth first search. So we're going to track a queue of unprocessed types and one by one move them into the processed type list.
 
 @@@
 

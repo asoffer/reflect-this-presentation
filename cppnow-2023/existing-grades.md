@@ -55,7 +55,7 @@ NOTES:
 
 * Evolution -- Requires lots of changes.
 * Understandability -- By definition, nothing tricky going on here.
-* Safety & testing -- Easy to forget to add fields or order them incorrectly.
+* Safety & testing -- Easy to forget to add fields or order them incorrectly. But possibly worse is if you forget to add a field into your hasher. Now you're going to have lots of hash collisions and suddenly your constant-time lookups become linear time. If an attacker has control over the values being inserted, you have a security vulnerability in the form of a denial of service attack.
 @@@
 
 ## Boost.PFR

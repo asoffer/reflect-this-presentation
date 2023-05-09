@@ -5,7 +5,7 @@
 
 NOTES:
 
-The most common problems we saw were that people forgot the `friend EnableExtensions`.
+The most common problems we saw were that people forgot to add the field count when it was needed.
 
 @@@
 
